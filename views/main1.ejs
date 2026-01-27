@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Archive | Library Management</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --text-gold: #c5a059;
+            --text-light: #f8fafc;
+            --accent: #334155;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-light);
+            font-family: 'Inter', sans-serif;
+            overflow: hidden; /* Keeps it neat */
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Animated Background Particles */
+        .background-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(30, 41, 59, 0.5) 0%, rgba(15, 23, 42, 1) 100%);
+            z-index: -1;
+        }
+
+        .floating-shape {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(197, 160, 89, 0.03);
+            filter: blur(40px);
+            z-index: -1;
+            animation: float 20s infinite alternate ease-in-out;
+        }
+
+        /* Main Content */
+        .hero-section {
+            text-align: center;
+            max-width: 800px;
+            padding: 20px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1.5s forwards ease-out;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+            margin-bottom: 20px;
+            color: var(--text-gold);
+        }
+
+        p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #94a3b8;
+            margin-bottom: 40px;
+            letter-spacing: 1px;
+            font-style: italic;
+        }
+
+        /* The "Get Started" Button */
+        .get-started-btn {
+            position: relative;
+            padding: 18px 45px;
+            font-size: 0.9rem;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--text-gold);
+            background: transparent;
+            border: 1px solid var(--text-gold);
+            cursor: pointer;
+            transition: all 0.4s ease;
+            overflow: hidden;
+            outline: none;
+        }
+
+        .get-started-btn:hover {
+            background: var(--text-gold);
+            color: var(--bg-color);
+            box-shadow: 0 0 30px rgba(197, 160, 89, 0.3);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 100px); }
+        }
+
+        /* Divider Decoration */
+        .divider {
+            width: 60px;
+            height: 2px;
+            background: var(--text-gold);
+            margin: 0 auto 30px;
+            opacity: 0.5;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="background-overlay"></div>
+    <div class="floating-shape" style="width: 400px; height: 400px; top: -10%; left: -10%;"></div>
+    <div class="floating-shape" style="width: 300px; height: 300px; bottom: -5%; right: -5%; animation-delay: -5s;"></div>
+
+    <main class="hero-section">
+        <div class="divider"></div>
+        <h1>The Modern Archive</h1>
+        <p>Where the silence of history meets the velocity of modern management.<br> 
+           Organize, track, and preserve the world’s collective wisdom with precision.</p>
+        
+        <button class="get-started-btn">Get Started</button>
+    </main>
+
+    <script>
+        // Simple click interaction for the button
+        document.querySelector('.get-started-btn').addEventListener('click', () => {
+            // Add your redirect logic here
+            alert("Proceeding to the Library System...");
+        });
+    </script>
+</body>
+</html>

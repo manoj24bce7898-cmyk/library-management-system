@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Archive | Library Management System</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        :root {
+            --primary: #0f172a; 
+            --accent: #c5a059;  
+            --glass: rgba(255, 255, 255, 0.03);
+            --border: rgba(197, 160, 89, 0.2);
+            --text: #f8fafc;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: radial-gradient(circle at top right, #1e293b, #0f172a);
+            color: var(--text);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .bg-glow {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: url('https://www.transparenttextures.com/patterns/black-paper.png');
+            opacity: 0.3;
+            z-index: -1;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            animation: fadeIn 2s ease-in;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            color: var(--accent);
+            text-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            margin-bottom: 10px;
+            letter-spacing: -1px;
+        }
+
+        .hero-divider {
+            width: 150px;
+            height: 3px;
+            background: var(--accent);
+            margin: 20px 0;
+        }
+
+        /* --- STATS BAR --- */
+        .stats-bar {
+            display: flex;
+            gap: 40px;
+            margin-top: 30px;
+            font-size: 0.9rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .stat-item b { font-size: 1.2rem; display: block; color: white; }
+
+        /* --- CONTAINERS --- */
+        .section-container {
+            max-width: 1100px;
+            margin: 0 auto 100px auto;
+            padding: 60px;
+            background: var(--glass);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s ease-out;
+        }
+
+        .section-container.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .typing-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: var(--accent);
+            margin-bottom: 30px;
+            border-left: 4px solid var(--accent);
+            padding-left: 20px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .feature-card {
+            background: rgba(255,255,255,0.05);
+            padding: 35px;
+            border-radius: 15px;
+            border: 1px solid transparent;
+            transition: 0.4s;
+        }
+
+        .feature-card:hover {
+            border-color: var(--accent);
+            background: rgba(197, 160, 89, 0.05);
+            transform: translateY(-10px);
+        }
+
+        .feature-card i {
+            font-size: 2rem;
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 { margin-bottom: 10px; color: #fff; }
+
+        .cta-wrapper {
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .btn-get-started {
+            padding: 20px 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary);
+            background: var(--accent);
+            text-decoration: none;
+            border-radius: 50px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: 0.4s;
+            display: inline-block;
+        }
+
+        .btn-get-started:hover {
+            transform: scale(1.05);
+            background: #fff;
+        }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .scroll-down {
+            margin-top: 40px;
+            font-size: 1.5rem;
+            color: var(--accent);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-10px);}
+            60% {transform: translateY(-5px);}
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-glow"></div>
+
+    <header class="hero">
+        <h1>Library Management System</h1>
+        <div class="hero-divider"></div>
+        <p style="letter-spacing: 3px; text-transform: uppercase; font-weight: 300;">Unified Digital Archive & Resource Tracker</p>
+        
+        <div class="stats-bar">
+            <div class="stat-item"><b>5,000+</b> Books</div>
+            <div class="stat-item"><b>1,200+</b> Students</div>
+            <div class="stat-item"><b>100%</b> Digital</div>
+        </div>
+
+        <div class="scroll-down"><i class="fa-solid fa-chevron-down"></i></div>
+    </header>
+
+    <div class="section-container scroll-reveal">
+        <h2 id="type-about" class="typing-title"></h2>
+        <p style="font-size: 1.1rem; font-weight: 300; color: #94a3b8;">
+            This Library Management System is built to automate the heavy lifting of academic administration. 
+            From tracking physical book movements using Registration Numbers to hosting a digital repository 
+            of Syllabi, we ensure that every resource is exactly where it needs to be.
+        </p>
+    </div>
+
+    <div class="section-container scroll-reveal">
+        <h2 id="type-student" class="typing-title"></h2>
+        <div class="grid">
+            <div class="feature-card">
+                <i class="fa-solid fa-book-open"></i>
+                <h3>Catalog Access</h3>
+                <p>Browse the entire collection of books categorized by subject, author, and year of publication.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fa-solid fa-file-pdf"></i>
+                <h3>Syllabus Hub</h3>
+                <p>Instantly download official subject PDFs for your current semester directly from the dashboard.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fa-solid fa-calendar-day"></i>
+                <h3>Loan Status</h3>
+                <p>Check your specific "Remainders" to see booked dates and return deadlines using your Reg ID.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="section-container scroll-reveal">
+        <h2 id="type-admin" class="typing-title"></h2>
+        <div class="grid">
+            <div class="feature-card">
+                <i class="fa-solid fa-plus-minus"></i>
+                <h3>Inventory Control</h3>
+                <p>Seamlessly add new books or remove outdated records to keep the library database current.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fa-solid fa-bell"></i>
+                <h3>Remainder System</h3>
+                <p>Monitor pending returns and manage the "Issue" logs for every student in the system.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fa-solid fa-cloud-arrow-up"></i>
+                <h3>Syllabus Management</h3>
+                <p>Admin tools to upload and update academic PDFs for all subject categories with one click.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="cta-wrapper scroll-reveal">
+        <h2 style="font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 20px;">Enter the Portal</h2>
+        <p style="margin-bottom: 30px; color: #94a3b8;">Scalable for thousands of concurrent users and unlimited records.</p>
+        <a href="/" class="btn-get-started">Get started</a>
+    </header>
+
+    <footer style="padding: 50px; text-align: center; color: #475569; font-size: 0.8rem; border-top: 1px solid var(--border);">
+        &copy; 2026 DIGITAL LIBRARY MANAGEMENT | OPTIMIZED FOR ACADEMIC EXCELLENCE
+    </footer>
+
+    <script>
+        function typeWriter(id, text) {
+            let i = 0;
+            const el = document.getElementById(id);
+            el.innerHTML = "";
+            function run() {
+                if (i < text.length) {
+                    el.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(run, 50);
+                }
+            }
+            run();
+        }
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                    
+                    if(entry.target.contains(document.getElementById('type-about'))) {
+                        typeWriter('type-about', 'Institutional Intelligence');
+                    }
+                    if(entry.target.contains(document.getElementById('type-student'))) {
+                        typeWriter('type-student', 'Student Resource Portal');
+                    }
+                    if(entry.target.contains(document.getElementById('type-admin'))) {
+                        typeWriter('type-admin', 'Administrative Control');
+                    }
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.2 });
+
+        document.querySelectorAll('.scroll-reveal').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>

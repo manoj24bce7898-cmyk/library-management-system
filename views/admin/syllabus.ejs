@@ -1,0 +1,49 @@
+<div class="main">
+<form method="post" action="/addsyllabus/<%=email %>/submit" enctype="multipart/form-data">
+ <div class="main1">   
+  <div class="col-md-6" style="padding: 20px; width: 50%;">
+    <label class="form-label">Subject Name</label>
+    <input type="text" class="form-control" name="subjectName" required>
+  </div>
+
+  <div class="col-md-6" style="padding: 20px; width: 50%;">
+    <label class="form-label">Upload PDF</label>
+    <input type="file" class="form-control" name="syllabusPdf" accept=".pdf" required>
+  </div>
+ </div>
+ <div style="padding: 20px; position: relative; left: 40%;">
+  <button type="submit" class="btn btn-primary">Upload PDF</button>
+    </div>
+</form>
+</div>
+<style>
+  form {
+    margin-top: 20px;
+    max-width: 600px;
+  }
+    .form-label {
+        font-weight: bold;
+    }
+    .btn {
+        margin-top: 15px;
+    }
+    .main1 {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        flex-direction: row;
+    }
+    .main{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid #ccc;
+    border-radius: 2rem;
+    padding: 30px;
+    background: #f9f9f9;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    }
+</style>

@@ -1,0 +1,136 @@
+<h1>Search Results</h1>
+<div class="book-grid">
+  <% books.forEach(book => { %>
+    <div class="book-card">
+      
+      <div class="book-image">
+        <img src="<%= book.bookImage %>" alt="<%= book.title %>">
+      </div>
+
+      <div class="book-content">
+        <h3 class="book-title"><%= book.title %></h3>
+        <p class="book-author">by <%= book.author %></p>
+
+        <div class="book-meta">
+          <span>Year <%= book.year %></span>
+          <span>Sem <%= book.semester %></span>
+          <span><%= book.subject %></span>
+        </div>
+
+        <p class="book-desc">
+          <%= book.description %>
+        </p>
+
+        <a href="/books/<%= book._id %>/<%= email %>" class="book-btn">
+          View Details
+        </a>
+      </div>
+
+    </div>
+  <% }) %>
+</div>
+
+<style>
+    /* GRID LAYOUT */
+.book-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 35px;
+  padding: 40px;
+}
+
+/* CARD */
+.book-card {
+  background: linear-gradient(180deg, #1e1e2f, #26263d);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.45);
+  transition: all 0.4s ease;
+  transform-style: preserve-3d;
+  position: relative;
+}
+
+/* HOVER EFFECT */
+.book-card:hover {
+  transform: translateY(-12px) scale(1.03);
+  box-shadow: 0 25px 55px rgba(0,0,0,0.7);
+}
+
+/* IMAGE */
+.book-image {
+  height: 260px;
+  overflow: hidden;
+}
+
+.book-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.book-card:hover img {
+  transform: scale(1.12);
+}
+
+/* CONTENT */
+.book-content {
+  padding: 20px;
+  color: #eaeaea;
+}
+
+/* TITLE */
+.book-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+/* AUTHOR */
+.book-author {
+  font-size: 14px;
+  color: #b5b5b5;
+  margin-bottom: 12px;
+}
+
+/* META INFO */
+.book-meta {
+  display: flex;
+  gap: 10px;
+  font-size: 12px;
+  margin-bottom: 12px;
+}
+
+.book-meta span {
+  background: rgba(255,255,255,0.08);
+  padding: 4px 8px;
+  border-radius: 8px;
+}
+
+/* DESCRIPTION */
+.book-desc {
+  font-size: 13px;
+  line-height: 1.6;
+  color: #cfcfcf;
+  margin-bottom: 16px;
+}
+
+/* BUTTON */
+.book-btn {
+  display: inline-block;
+  text-decoration: none;
+  padding: 10px 18px;
+  border-radius: 25px;
+  background: linear-gradient(135deg, #ffb703, #fb8500);
+  color: #111;
+  font-size: 13px;
+  font-weight: 600;
+  transition: all 0.35s ease;
+}
+
+.book-btn:hover {
+  background: linear-gradient(135deg, #ffd166, #f77f00);
+  transform: translateY(-2px);
+}
+
+</style>

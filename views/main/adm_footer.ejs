@@ -1,0 +1,160 @@
+<footer class="footer">
+    <div class="footer-container">
+
+        <!-- BRAND / ABOUT -->
+        <div class="footer-section brand">
+            <div class="footer-logo">
+                <i class="fa-regular fa-compass"></i>
+                <span>My Digital Library</span>
+            </div>
+            <p>
+                My Digital Library is a smart platform designed to
+                organize academic resources, manage book records,
+                and support students in their learning journey.
+            </p>
+        </div>
+
+        <!-- ACADEMIC NOTE -->
+        <div class="footer-section">
+            <h4>Library Statement</h4>
+            <p>
+                “A room without books is like a body without a soul.”
+                <br>
+                — Knowledge begins here.
+            </p>
+        </div>
+
+        <!-- SUPPORT INFO -->
+        <div class="footer-section">
+            <h4>Support</h4>
+            <p>
+                For assistance, contact the library administration
+                during working hours or reach out through the
+                institution help desk.
+            </p>
+        </div>
+
+    </div>
+
+    <!-- COPYRIGHT -->
+    <div class="footer-bottom">
+        © 2026 My Digital Library · Designed for Academic Excellence
+    </div>
+</footer>
+<style>
+    /* FOOTER */
+.footer {
+    background: rgba(30, 30, 47, 0.95);
+    color: #dcdcdc;
+    padding: 60px 0 20px;
+    margin-top: 80px;
+}
+
+/* CONTAINER */
+.footer-container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 0 40px;
+    display: grid;
+    grid-template-columns: 2fr 1.2fr 1.2fr;
+    gap: 40px;
+}
+
+/* LOGO */
+.footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 22px;
+    font-weight: 600;
+    color: #ffb703;
+    margin-bottom: 14px;
+}
+
+.footer-logo i {
+    font-size: 26px;
+}
+
+/* TEXT */
+.footer-section p {
+    font-size: 14px;
+    line-height: 1.8;
+    color: #bfbfbf;
+}
+
+/* HEADINGS */
+.footer-section h4 {
+    margin-bottom: 12px;
+    font-size: 16px;
+    color: #ffffff;
+    letter-spacing: 0.5px;
+}
+
+/* BOTTOM BAR */
+.footer-bottom {
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    font-size: 13px;
+    color: #9f9f9f;
+}
+
+/* ============================= */
+/* FOOTER – FINAL FIX            */
+/* ============================= */
+
+.footer {
+    background: rgba(30, 30, 47, 0.95);
+    color: #dcdcdc;
+    padding: 60px 0 20px;
+    margin-top: 80px;
+
+    /* 🔑 important fixes */
+    position: relative;
+    z-index: 1;
+    clear: both;
+}
+
+/* Ensure footer content is not affected by above elements */
+.footer * {
+    position: relative;
+    z-index: 1;
+}
+
+/* Bottom copyright spacing */
+.footer-bottom {
+    margin-top: 40px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    text-align: center;
+    font-size: 13px;
+    color: #9f9f9f;
+}
+
+/* ================================= */
+/* FOOTER – OVERLAP HARD FIX         */
+/* ================================= */
+
+.footer {
+    background: rgba(30, 30, 47, 0.98);
+    color: #dcdcdc;
+
+    padding: 70px 0 25px;   /* more top padding */
+    margin-top: 250px;     /* 🔑 pushes footer away from content */
+
+    position: relative;
+    z-index: 1;
+
+    /* visual separation */
+    box-shadow: 0 -20px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* Ensure footer content stays clean */
+.footer-container,
+.footer-bottom {
+    position: relative;
+    z-index: 2;
+}
+
+</style>

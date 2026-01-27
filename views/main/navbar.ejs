@@ -1,0 +1,151 @@
+<nav class="navbar">
+    <!-- LEFT: LOGO + TITLE -->
+    <div class="nav-left">
+        <a class="navbar-brand" href="/">
+            <i class="fa-regular fa-compass logo-icon"></i>
+        </a>
+        <span class="library-text">My Digital Library</span>
+    </div>
+
+    <!-- CENTER: LINKS -->
+    <ul class="nav-links">
+        <li>
+            <a href="/home/<%= profile.email %>">
+                <i class="fa-solid fa-house"></i>
+                Home
+            </a>
+        </li>
+        <li>
+            <a href="/allbooks/<%= profile.email %>">
+                <i class="fa-solid fa-book-open"></i>
+                All Books
+            </a>
+        </li>
+        <li>
+            <a href="/wishlist/<%= profile.email %>">
+                <i class="fa-solid fa-heart"></i>
+                Wishlist
+            </a>
+        </li>
+        <li>
+            <a href="/booked/<%= profile.email %>">
+                <i class="fa-solid fa-bookmark"></i>
+                Booked
+            </a>
+        </li>
+        <li>
+            <a href="/search/<%= profile.email %>">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                Search
+            </a>
+        </li>
+        <li>
+            <a href="/syllabus/<%= profile.email %>">
+                <i class="fa-solid fa-list-check"></i>
+                Syllabus
+            </a>
+        </li>
+    </ul>
+
+    <!-- RIGHT: PROFILE -->
+    <div class="nav-right">
+        <a href="/student/profile/<%= profile.email %>" class="profile-btn">
+            <i class="fa-solid fa-user"></i>
+            Profile
+        </a>
+    </div>
+</nav>
+
+<style>
+.navbar {
+    height: 70px;
+    padding: 0 40px;
+    background: rgba(30, 30, 47, 0.9);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* LEFT SECTION */
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+/* LOGO ICON */
+.logo-icon {
+    font-size: 30px;
+    color: #ffb703;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+/* LOGO HOVER */
+.navbar-brand:hover .logo-icon {
+    transform: rotate(-15deg) scale(1.15);
+    color: #ffd166;
+}
+
+/* LIBRARY TEXT */
+.library-text {
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: #f1f1f1;
+    letter-spacing: 1px;
+}
+
+/* CENTER LINKS */
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 35px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #dcdcdc;
+    font-size: 16px;
+    position: relative;
+}
+
+/* UNDERLINE HOVER */
+.nav-links a::after {
+    content: "";
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    background: #ffb703;
+    left: 0;
+    bottom: -6px;
+    transition: width 0.3s;
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+.nav-links a:hover {
+    color: white;
+}
+
+/* PROFILE BUTTON */
+.profile-btn {
+    padding: 8px 18px;
+    background: linear-gradient(135deg, #ffb703, #fb8500);
+    color: #1e1e2f;
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.profile-btn:hover {
+    transform: scale(1.08);
+    box-shadow: 0 0 18px rgba(255,183,3,0.7);
+}
+</style>

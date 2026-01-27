@@ -1,0 +1,46 @@
+<div class="table">
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">regNum</th>
+            <th scope="col">subject</th>
+            <th scope="col">author</th>
+            <th scope="col">year</th>
+            <th scope="col">Booked Date</th>
+            <th scope="col">Return Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% rem.forEach((item, index) => { %>
+            <tr>
+                <td><%= index + 1 %></td>
+                <td><%= item.regNumber %></td>
+                <td><%= item.subject %></td>
+                <td><%= item.author %></td>
+                <td><%= item.year %></td>
+                <td><%= item.bookeddate %></td>
+                <td><%= item.duedate %></td>
+            </tr>
+        <% }) %>
+    </tbody>
+
+</table>
+
+</div>
+
+<style>
+    .table {
+        margin-top: 20px;
+        border-collapse: collapse;
+    }
+    .table th, .table td {
+        text-align: center;
+    }
+    .table table-striped{
+        border: 2px solid #ccc;
+        border-radius: 2rem;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+</style>

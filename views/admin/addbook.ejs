@@ -1,0 +1,121 @@
+<div class="main">
+    <div class="enter-container">
+        <form class="row g-3" method="post" action="/addbooks/<%= email %>/submit">
+
+  <div class="col-md-6">
+    <label for="title" class="form-label">Title</label>
+    <input type="text" class="form-control" id="title" name="title">
+  </div>
+
+  <div class="col-md-6">
+    <label for="author" class="form-label">Author</label>
+    <input type="text" class="form-control" id="author" name="author">
+  </div>
+
+  <div class="col-12">
+    <label for="description" class="form-label">Description</label>
+    <input type="text" class="form-control" id="description" name="description">
+  </div>
+
+  <div class="col-md-6">
+    <label for="subject" class="form-label">Subject</label>
+    <input type="text" class="form-control" id="subject" name="subject">
+  </div>
+
+  <div class="col-md-6">
+    <label for="availableCopies" class="form-label">Available copies</label>
+    <input type="number" class="form-control" id="availableCopies" name="availableCopies">
+  </div>
+
+  <div class="col-md-6">
+    <label for="year" class="form-label">Year</label>
+    <select id="year" class="form-select" name="year">
+      <option selected>Choose...</option>
+      <option>1</option>
+      <option>2</option>
+      <option>3</option>
+      <option>4</option>
+    </select>
+  </div>
+
+  <div class="col-md-6">
+    <label for="semester" class="form-label">Semester</label>
+    <select id="semester" class="form-select" name="semester">
+      <option selected>Choose...</option>
+      <option>1</option>
+      <option>2</option>
+      <option>3</option>
+      <option>4</option>
+      <option>5</option>
+      <option>6</option>
+      <option>7</option>
+      <option>8</option>
+    </select>
+  </div>
+
+  <div class="col-12">
+    <button type="submit" class="btn btn-primary">Add book</button>
+  </div>
+
+</form>
+
+    </div>
+</div>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+.main{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+    position: relative;
+    top: 20px;
+    left: 30px;
+    border: 2px solid #ccc;
+    border-radius: 2rem;
+    background: linear-gradient(135deg, #f4f6fb, #e6e9f0);
+}
+
+.main1{
+    width: 800px;
+    height: 50px;
+    border: 2px solid #ccc;
+    border-radius: 2rem;
+}
+
+.main1:hover{
+    border: 2px solid rgb(200, 209, 26);
+    background-color: bisque;
+    box-shadow: 5px 2px rgb(255, 238, 0) 3.5;
+}
+
+.main2{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 30px;
+    padding: 20px;
+}
+
+.button{
+    position: relative;
+    top: 20px;
+    left: 10px;
+    width: 100px;
+    height: 70px;
+    border: 2px solid #ccc;
+    border-radius: 2rem;
+    background: yellow;
+    color: black;
+}
+</style>

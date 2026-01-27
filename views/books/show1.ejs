@@ -1,0 +1,149 @@
+<div class="book-detail-container">
+
+  <div class="book-detail-image">
+    <img src="<%= book.bookImage %>" alt="<%= book.title %>">
+  </div>
+
+  <!-- RIGHT: BOOK INFO -->
+  <div class="book-detail-content">
+
+    <h1><%= book.title %></h1>
+    <h3>by <%= book.author %></h3>
+
+    <div class="book-tags">
+      <span><%= book.subject %></span>
+      <span>Year <%= book.year %></span>
+      <span>Semester <%= book.semester %></span>
+    </div>
+
+    <p class="book-description">
+      <%= book.description %>
+    </p>
+
+
+    <p class="book-copies">
+      Available Copies: <strong><%= book.availableCopies %></strong>
+    </p>
+
+    <!-- ACTION BUTTONS -->
+    <div class="book-actions">
+      <form action="/removebook/<%=book._id%>/<%=email%>" method="post" class="book-btn">
+        <button type="submit" class="book-btn-main">Remove Book</button>
+        </form>
+    </div>
+
+  </div>
+</div>
+
+<style>
+    /* MAIN CONTAINER */
+.book-detail-container {
+  display: flex;
+  gap: 50px;
+  padding: 60px;
+  background: linear-gradient(135deg, #1e1e2f, #2b2b40);
+  min-height: 100vh;
+  color: #eaeaea;
+  position: relative;
+  top: 50px;
+  border-radius: 2rem;
+  box-shadow: 0 25px 50px rgba(196, 255, 1, 0.6);
+}
+
+/* IMAGE */
+.book-detail-image img {
+  width: 320px;
+  height: 460px;
+  object-fit: cover;
+  border-radius: 20px;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.6);
+  transition: transform 0.4s ease;
+}
+
+.book-detail-image img:hover {
+  transform: scale(1.05);
+}
+
+/* CONTENT */
+.book-detail-content {
+  max-width: 600px;
+}
+
+.book-detail-content h1 {
+  font-size: 32px;
+  margin-bottom: 8px;
+}
+
+.book-detail-content h3 {
+  color: #b5b5b5;
+  margin-bottom: 16px;
+}
+
+/* TAGS */
+.book-tags {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.book-tags span {
+  background: rgba(255,255,255,0.08);
+  padding: 6px 12px;
+  border-radius: 12px;
+  font-size: 13px;
+}
+
+/* DESCRIPTION */
+.book-description {
+  line-height: 1.8;
+  color: #d0d0d0;
+  margin-bottom: 18px;
+}
+
+/* COPIES */
+.book-copies {
+  margin: 18px 0;
+  font-size: 15px;
+}
+
+/* ACTION BUTTONS */
+.book-actions {
+  display: flex;
+  gap: 20px;
+  margin-top: 25px;
+}
+
+.wishlist-btn,
+.book-btn-main {
+  padding: 12px 22px;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.35s ease;
+}
+
+/* WISHLIST */
+.wishlist-btn {
+  background: transparent;
+  border: 2px solid #ffb703;
+  color: #ffb703;
+}
+
+.wishlist-btn:hover {
+  background: #ffb703;
+  color: #111;
+  transform: translateY(-2px);
+}
+
+/* BOOK NOW */
+.book-btn-main {
+  background: linear-gradient(135deg, #fb8500, #ffb703);
+  color: #111;
+}
+
+.book-btn-main:hover {
+  transform: translateY(-2px) scale(1.05);
+}
+
+</style>

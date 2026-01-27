@@ -1,0 +1,31 @@
+<h1>Search Results</h1>
+<div class="book-grid">
+  <% books.forEach(book => { %>
+    <div class="book-card">
+      
+      <div class="book-image">
+        <img src="<%= book.bookImage %>" alt="<%= book.title %>">
+      </div>
+
+      <div class="book-content">
+        <h3 class="book-title"><%= book.title %></h3>
+        <p class="book-author">by <%= book.author %></p>
+
+        <div class="book-meta">
+          <span>Year <%= book.year %></span>
+          <span>Sem <%= book.semester %></span>
+          <span><%= book.subject %></span>
+        </div>
+
+        <p class="book-desc">
+          <%= book.description %>
+        </p>
+
+        <a href="/books/<%= book._id %>/<%= email %>" class="book-btn">
+          View Details
+        </a>
+      </div>
+
+    </div>
+  <% }) %>
+</div>
