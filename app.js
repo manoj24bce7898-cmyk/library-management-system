@@ -54,11 +54,6 @@ const booked = require("./models/booked");
 // ================= RAZORPAY =================
 
 
-const razorpay = new Razorpay({
-  key_id: process.env.RAZORPAY_KEY_ID,
-  key_secret: process.env.RAZORPAY_KEY_SECRET
-});
-
 
 // ================= OPENAI =================
 
@@ -283,50 +278,9 @@ app.get("/payfines/:id", async (req, res) => {
   res.redirect(`/fines/${book.email}`);
 });
 
-app.post("/create-payment/:bookId", async (req, res) => {
 
-  const { bookId } = req.params;
 
-  const book = await booked.findById(bookId);
 
-  if (!book) return res.send("Book not found");
-
-  let today = new Date();
-  let duedate = new Date(book.duedate);
-
-  let overdueDays = Math.ceil(
-    (today.getTime() - duedate.getTime()) / (1000 * 60 * 60 * 24)
-  );
-
-  if (overdueDays <= 0)
-    return res.send("No fine");
-
-  let fineAmount = overdueDays * 100;
-
-  const options = {
-    amount: fineAmount * 100, // paise
-    currency: "INR",
-    receipt: bookId
-  };
-
-  const order = await razorpay.orders.create(options);
-
-  res.json({
-    orderId: order.id,
-    amount: order.amount
-  });
-
-});
-
-app.post("/payment-success/:bookId", async (req, res) => {
-
-  const { bookId } = req.params;
-
-  await booked.findByIdAndDelete(bookId);
-
-  res.send("Fine paid successfully");
-
-});
 
 // Signup page
 app.get("/student/signup", (req, res) => {
