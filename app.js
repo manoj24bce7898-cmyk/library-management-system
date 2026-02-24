@@ -11,7 +11,6 @@ require("dotenv").config();
 
 const multer = require("multer");   // ✅ ONLY ONCE HERE
 const Razorpay = require("razorpay");
-const OpenAI = require("openai");
 const { v4: uuidv4 } = require("uuid");
 
 app.use(express.urlencoded({ extended: true }));
@@ -54,19 +53,19 @@ const booked = require("./models/booked");
 
 // ================= RAZORPAY =================
 
-const razorpay = new Razorpay({
+
   key_id: "rzp_test_ABC123XYZ",
   key_secret: "abc123xyz456secret"
+const razorpay = new Razorpay({
+  key_id: process.env.RAZORPAY_KEY_ID,
+  key_secret: process.env.RAZORPAY_KEY_SECRET
 });
 
 
 // ================= OPENAI =================
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY
-});
 
-cron.schedule("* 9 * * *", async () => {
+cron.schedule("0 9 * * *", async () => {
 
   console.log("⏰ Checking book reminders...");
 
