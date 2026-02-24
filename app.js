@@ -54,8 +54,6 @@ const booked = require("./models/booked");
 // ================= RAZORPAY =================
 
 
-  key_id: "rzp_test_ABC123XYZ",
-  key_secret: "abc123xyz456secret"
 const razorpay = new Razorpay({
   key_id: process.env.RAZORPAY_KEY_ID,
   key_secret: process.env.RAZORPAY_KEY_SECRET
