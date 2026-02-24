@@ -1,8 +1,9 @@
 <div class="head">
     <h2 id="typing-heading" class="typing-heading"></h2>
 </div>
+<h2>Overdue Books</h2>
 <div class="book-grid">
-  <% books.forEach(book => { %>
+  <% overdueBooks.forEach(book => { %>
     <div class="book-card">
       
       <div class="book-image">
@@ -23,10 +24,44 @@
           <%= book.description %>
         </p>
 
-        <a href="/books/<%=email%>/<%= book._id %>" class="book-btn">
+        <a href="/bookedbooks/<%= book._id %>/<%= email %>" class="book-btn">
           View Details
         </a>
-        <a href="/remove/<%=email%>/<%= book._id %>" class="book-btn">
+        <a href="/removebooked/<%= email%>/<%= book._id %>" class="book-btn">
+          pay fine and remove from bookings
+        </a>
+      </div>
+
+    </div>
+  <% }) %>
+</div>
+<h2>Valid Bookings</h2>
+<div class="book-grid">
+  <% validBooks.forEach(book => { %>
+    <div class="book-card">
+      
+      <div class="book-image">
+        <img src="<%= book.bookImage %>" alt="<%= book.title %>">
+      </div>
+
+      <div class="book-content">
+        <h3 class="book-title"><%= book.title %></h3>
+        <p class="book-author">by <%= book.author %></p>
+
+        <div class="book-meta">
+          <span>Year <%= book.year %></span>
+          <span>Sem <%= book.semester %></span>
+          <span><%= book.subject %></span>
+        </div>
+
+        <p class="book-desc">
+          <%= book.description %>
+        </p>
+
+        <a href="/bookedbooks/<%= book._id %>/<%= email %>" class="book-btn">
+          View Details
+        </a>
+        <a href="/removebooked/<%= email%>/<%= book._id %>" class="book-btn">
           remove from bookings
         </a>
       </div>
@@ -34,6 +69,7 @@
     </div>
   <% }) %>
 </div>
+
 <style>
 .head{
   width: 100%;

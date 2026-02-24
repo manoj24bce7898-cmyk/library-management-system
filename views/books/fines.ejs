@@ -1,0 +1,148 @@
+<!-- Razorpay Checkout Script -->
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+<div class="container mt-4">
+
+  <h2 class="mb-4">Overdue Books & Fines</h2>
+
+  <% if (overdueBooks.length === 0) { %>
+
+      <div class="alert alert-success">
+        No fines pending 🎉
+      </div>
+
+  <% } else { %>
+
+      <table class="table table-bordered table-striped">
+
+        <thead class="table-dark">
+          <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Due Date</th>
+            <th>Fine Amount</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          <% overdueBooks.forEach(book => { %>
+
+            <tr>
+
+              <td><%= book.title %></td>
+
+              <td><%= book.author %></td>
+
+              <td>
+                <%= new Date(book.duedate).toLocaleDateString() %>
+              </td>
+
+              <td>
+                ₹<%= book.fineAmount %>
+              </td>
+
+              <td>
+
+                <button 
+                  class="btn btn-danger"
+                  onclick="payFine('<%= book._id %>', <%= book.fineAmount %>)"
+                >
+                  Pay Now
+                </button>
+
+              </td>
+
+            </tr>
+
+          <% }) %>
+
+        </tbody>
+
+      </table>
+
+  <% } %>
+
+</div>
+
+
+<script>
+
+const RAZORPAY_KEY_ID = "rzp_test_AbCdEfGh12345"; // example: rzp_test_xxxxxx
+
+
+async function payFine(bookId, fineAmount)
+{
+
+  try
+  {
+
+    // Create order from backend
+    const res = await fetch(`/create-payment/${bookId}`, {
+      method: "POST"
+    });
+
+    const data = await res.json();
+
+
+    const options =
+    {
+      key: RAZORPAY_KEY_ID,
+
+      amount: data.amount,
+
+      currency: "INR",
+
+      name: "Library Management System",
+
+      description: "Overdue Book Fine",
+
+      order_id: data.orderId,
+
+
+      handler: async function (response)
+      {
+
+        console.log("Payment success:", response);
+
+        await fetch(`/payment-success/${bookId}`, {
+          method: "POST"
+        });
+
+        alert("Payment Successful ✅");
+
+        window.location.reload();
+
+      },
+
+
+      prefill:
+      {
+        name: "<%= profile.firstName %>",
+        email: "<%= profile.email %>"
+      },
+
+
+      theme:
+      {
+        color: "#0d6efd"
+      }
+
+    };
+
+
+    const rzp = new Razorpay(options);
+
+    rzp.open();
+
+  }
+  catch(error)
+  {
+    console.error("Payment error:", error);
+    alert("Payment failed. Try again.");
+  }
+
+}
+
+</script>

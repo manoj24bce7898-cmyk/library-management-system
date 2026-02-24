@@ -24,10 +24,10 @@
           <%= book.description %>
         </p>
 
-        <a href="/books/<%= book._id %>" class="book-btn">
+        <a href="/books/<%= book._id %>/<%= email %>" class="book-btn">
           View Details
         </a>
-        <a href="/remove1/<%= book._id %>" class="book-btn">
+        <a href="/remove1/<%= book._id %>/<%= email %>" class="book-btn">
           Remove from Wishlist
         </a>
       </div>

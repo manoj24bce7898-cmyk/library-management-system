@@ -16,12 +16,6 @@
             </a>
         </li>
         <li>
-            <a href="/allbooks/<%= profile.email %>">
-                <i class="fa-solid fa-book-open"></i>
-                All Books
-            </a>
-        </li>
-        <li>
             <a href="/wishlist/<%= profile.email %>">
                 <i class="fa-solid fa-heart"></i>
                 Wishlist
@@ -39,21 +33,27 @@
                 Search
             </a>
         </li>
+  
         <li>
-            <a href="/syllabus/<%= profile.email %>">
+            <a href="/fines/<%= profile.email %>">
                 <i class="fa-solid fa-list-check"></i>
-                Syllabus
+                Fines
             </a>
         </li>
-    </ul>
+        <li>
+          <a href="/ai-chat/<%= profile.email %>">
+            <i class="fa-solid fa-robot"></i>
+            OpenAI
+          </a>
+        </li>
+        <li>
+            <a href="/student/profile/<%= profile.email %>" class="profile-btn">
+                <i class="fa-solid fa-user"></i>
+                Profile
+            </a>
+        </li>
 
-    <!-- RIGHT: PROFILE -->
-    <div class="nav-right">
-        <a href="/student/profile/<%= profile.email %>" class="profile-btn">
-            <i class="fa-solid fa-user"></i>
-            Profile
-        </a>
-    </div>
+    </ul>
 </nav>
 
 <style>
@@ -147,5 +147,10 @@
 .profile-btn:hover {
     transform: scale(1.08);
     box-shadow: 0 0 18px rgba(255,183,3,0.7);
+}
+
+ul{
+  position: relative;
+  top: 10px;
 }
 </style>
