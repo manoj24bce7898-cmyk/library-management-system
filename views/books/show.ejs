@@ -1,160 +1,364 @@
 <div class="book-detail-container">
 
-  <div class="book-detail-image">
-    <img src="<%= book.bookImage %>" alt="<%= book.title %>">
-  </div>
+<!-- BOOK IMAGE -->
 
-  <!-- RIGHT: BOOK INFO -->
-  <div class="book-detail-content">
-
-    <h1><%= book.title %></h1>
-    <h3>by <%= book.author %></h3>
-
-    <div class="book-tags">
-      <span><%= book.subject %></span>
-      <span>Year <%= book.year %></span>
-      <span>Semester <%= book.semester %></span>
-    </div>
-
-    <p class="book-description">
-      <%= book.description %>
-    </p>
-
-    <% if (book.bookBeforeCover) { %>
-      <p><strong>Covers Before:</strong> <%= book.bookBeforeCover %></p>
-    <% } %>
-
-    <% if (book.bookAfterCover) { %>
-      <p><strong>Covers After:</strong> <%= book.bookAfterCover %></p>
-    <% } %>
-
-    <p class="book-copies">
-      Available Copies: <strong><%= book.availableCopies %></strong>
-    </p>
-
-    <!-- ACTION BUTTONS -->
-    <div class="book-actions">
-      <form action="/wishlist/add/<%= email %>/<%= book._id %>" method="POST">
-        <button class="wishlist-btn">⭐ Add to Wishlist</button>
-      </form>
-
-      <form action="/booking/add/<%= email %>/<%= book._id %>" method="POST">
-        <button class="book-btn-main">📘 Book Now</button>
-      </form>
-    </div>
-
-  </div>
+<div class="book-detail-image">
+<img src="<%= book.bookImage %>" alt="<%= book.title %>">
 </div>
 
+
+<!-- BOOK CONTENT -->
+
+<div class="book-detail-content">
+
+<h1><%= book.title %></h1>
+
+<h3>by <%= book.author %></h3>
+
+
+<div class="book-tags">
+
+<span><%= book.subject %></span>
+
+<span>Year <%= book.year %></span>
+
+<span>Semester <%= book.semester %></span>
+
+</div>
+
+
+<p class="book-description">
+<%= book.description %>
+</p>
+
+
+<% if (book.bookBeforeCover) { %>
+<p><strong>Covers Before:</strong> <%= book.bookBeforeCover %></p>
+<% } %>
+
+
+<% if (book.bookAfterCover) { %>
+<p><strong>Covers After:</strong> <%= book.bookAfterCover %></p>
+<% } %>
+
+
+<p class="book-copies">
+
+Available Copies: <strong><%= book.availableCopies %></strong>
+
+</p>
+
+
+<!-- ACTION BUTTONS -->
+
+<div class="book-actions">
+
+<form action="/wishlist/add/<%= email %>/<%= book._id %>" method="POST">
+
+<button class="wishlist-btn">
+
+⭐ Add to Wishlist
+
+</button>
+
+</form>
+
+
+<form action="/booking/add/<%= email %>/<%= book._id %>" method="POST">
+
+<button class="book-btn-main">
+
+📘 Book Now
+
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+</div>
+
+
+
 <style>
-    /* MAIN CONTAINER */
-.book-detail-container {
-  display: flex;
-  gap: 50px;
-  padding: 60px;
-  background: linear-gradient(135deg, #1e1e2f, #2b2b40);
-  min-height: 100vh;
-  color: #eaeaea;
-  position: relative;
-  top: 50px;
-  border-radius: 2rem;
-  box-shadow: 0 25px 50px rgba(196, 255, 1, 0.6);
+
+/* MAIN CONTAINER */
+
+.book-detail-container{
+
+display:flex;
+
+flex-wrap:wrap;
+
+gap:40px;
+
+padding:40px;
+
+margin-top:20px;
+
+background:linear-gradient(135deg,#1e1e2f,#2b2b40);
+
+border-radius:2rem;
+
+box-shadow:0 25px 50px rgba(0,0,0,0.5);
+
+color:#eaeaea;
+
 }
 
-/* IMAGE */
-.book-detail-image img {
-  width: 320px;
-  height: 460px;
-  object-fit: cover;
-  border-radius: 20px;
-  box-shadow: 0 25px 50px rgba(0,0,0,0.6);
-  transition: transform 0.4s ease;
+
+/* IMAGE SECTION */
+
+.book-detail-image{
+
+flex:1;
+
+display:flex;
+
+justify-content:center;
+
+align-items:flex-start;
+
 }
 
-.book-detail-image img:hover {
-  transform: scale(1.05);
+.book-detail-image img{
+
+width:100%;
+
+max-width:320px;
+
+height:auto;
+
+border-radius:20px;
+
+box-shadow:0 20px 40px rgba(0,0,0,0.6);
+
+transition:transform 0.4s;
+
 }
+
+.book-detail-image img:hover{
+
+transform:scale(1.05);
+
+}
+
 
 /* CONTENT */
-.book-detail-content {
-  max-width: 600px;
+
+.book-detail-content{
+
+flex:2;
+
+min-width:260px;
+
 }
 
-.book-detail-content h1 {
-  font-size: 32px;
-  margin-bottom: 8px;
+.book-detail-content h1{
+
+font-size:30px;
+
+margin-bottom:8px;
+
 }
 
-.book-detail-content h3 {
-  color: #b5b5b5;
-  margin-bottom: 16px;
+.book-detail-content h3{
+
+color:#b5b5b5;
+
+margin-bottom:16px;
+
 }
+
 
 /* TAGS */
-.book-tags {
-  display: flex;
-  gap: 12px;
-  margin-bottom: 20px;
+
+.book-tags{
+
+display:flex;
+
+flex-wrap:wrap;
+
+gap:10px;
+
+margin-bottom:20px;
+
 }
 
-.book-tags span {
-  background: rgba(255,255,255,0.08);
-  padding: 6px 12px;
-  border-radius: 12px;
-  font-size: 13px;
+.book-tags span{
+
+background:rgba(255,255,255,0.08);
+
+padding:6px 12px;
+
+border-radius:12px;
+
+font-size:13px;
+
 }
+
 
 /* DESCRIPTION */
-.book-description {
-  line-height: 1.8;
-  color: #d0d0d0;
-  margin-bottom: 18px;
+
+.book-description{
+
+line-height:1.8;
+
+color:#d0d0d0;
+
+margin-bottom:18px;
+
 }
+
 
 /* COPIES */
-.book-copies {
-  margin: 18px 0;
-  font-size: 15px;
+
+.book-copies{
+
+margin:18px 0;
+
+font-size:15px;
+
 }
 
+
 /* ACTION BUTTONS */
-.book-actions {
-  display: flex;
-  gap: 20px;
-  margin-top: 25px;
+
+.book-actions{
+
+display:flex;
+
+flex-wrap:wrap;
+
+gap:15px;
+
+margin-top:25px;
+
+}
+
+
+/* BUTTONS */
+
+.wishlist-btn,
+
+.book-btn-main{
+
+padding:12px 22px;
+
+border-radius:30px;
+
+border:none;
+
+cursor:pointer;
+
+font-weight:600;
+
+transition:0.3s;
+
+}
+
+
+/* WISHLIST BUTTON */
+
+.wishlist-btn{
+
+background:transparent;
+
+border:2px solid #ffb703;
+
+color:#ffb703;
+
+}
+
+.wishlist-btn:hover{
+
+background:#ffb703;
+
+color:#111;
+
+transform:translateY(-2px);
+
+}
+
+
+/* BOOK BUTTON */
+
+.book-btn-main{
+
+background:linear-gradient(135deg,#fb8500,#ffb703);
+
+color:#111;
+
+}
+
+.book-btn-main:hover{
+
+transform:translateY(-2px) scale(1.05);
+
+}
+
+
+/* TABLET */
+
+@media(max-width:768px){
+
+.book-detail-container{
+
+padding:30px;
+
+gap:30px;
+
+}
+
+.book-detail-content h1{
+
+font-size:26px;
+
+}
+
+}
+
+
+/* MOBILE */
+
+@media(max-width:480px){
+
+.book-detail-container{
+
+flex-direction:column;
+
+padding:20px;
+
+}
+
+.book-detail-image img{
+
+max-width:220px;
+
+}
+
+.book-detail-content h1{
+
+font-size:22px;
+
+}
+
+.book-actions{
+
+flex-direction:column;
+
 }
 
 .wishlist-btn,
-.book-btn-main {
-  padding: 12px 22px;
-  border-radius: 30px;
-  border: none;
-  cursor: pointer;
-  font-weight: 600;
-  transition: all 0.35s ease;
+
+.book-btn-main{
+
+width:100%;
+
 }
 
-/* WISHLIST */
-.wishlist-btn {
-  background: transparent;
-  border: 2px solid #ffb703;
-  color: #ffb703;
-}
-
-.wishlist-btn:hover {
-  background: #ffb703;
-  color: #111;
-  transform: translateY(-2px);
-}
-
-/* BOOK NOW */
-.book-btn-main {
-  background: linear-gradient(135deg, #fb8500, #ffb703);
-  color: #111;
-}
-
-.book-btn-main:hover {
-  transform: translateY(-2px) scale(1.05);
 }
 
 </style>

@@ -6,6 +6,8 @@ const mongoose = require("mongoose");
 const path = require("path");
 const ejsMate = require("ejs-mate");
 const expressLayouts = require("express-ejs-layouts");
+const bcrypt = require("bcrypt");
+const nodemailer = require("nodemailer");
 
 require("dotenv").config();
 
@@ -27,11 +29,21 @@ app.set("layout", "main/boiler1");
 const session = require("express-session");
 
 app.use(session({
-  secret: "mysecretkey",
+  secret:  process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true
 }));
 
+const transporter = nodemailer.createTransport({
+
+  service: "gmail",
+
+  auth: {
+    user: process.env.EMAIL,
+    pass: process.env.PASSWORD
+  }
+
+});
 
 // ================= DATABASE =================
 
@@ -51,7 +63,28 @@ const syllabusPdf = require('./models/syllabus');
 const booked = require("./models/booked");
 
 
-// ================= RAZORPAY =================
+// ================= middlewares=================
+app.use((req, res, next) => {
+  res.locals.errorMessage = req.session.errorMessage;
+  req.session.errorMessage = null; // clear after showing
+  next();
+});
+
+function userAuth(req, res, next) {
+
+  if (!req.session.userEmail) {
+    return res.redirect("/student");
+  }
+
+  if (req.params.email && req.params.email !== req.session.userEmail) {
+
+    req.session.errorMessage = "Access Denied! Invalid URL modification.";
+    return res.redirect(req.get("Referer") || `/student/student/${req.session.userEmail}`);
+  }
+
+  next();
+}
+
 
 
 
@@ -224,7 +257,12 @@ books:[]
 // ================= STUDENT AUTH =================
 
 app.get("/", (req, res) => {
-  res.render("main");
+  res.render("main2", { layout: "main/boiler1" });
+});
+
+app.get("/library", (req, res) => {
+  res.render("main", { layout: "main/boiler1" });
+
 });
 // Student main page
 app.get("/student", (req, res) => {
@@ -289,14 +327,98 @@ app.get("/student/signup", (req, res) => {
 
 // Signup submit (user)
 app.post("/student/signup/submit1", async (req, res) => {
+
   const { name, email, password } = req.body;
 
-  const newUser = new User({ name, email, password });
-  await newUser.save();
+  const hashedPassword = await bcrypt.hash(password, 10);
 
-  res.render("student/signup1", { layout: "main/boiler1" });
+  const otp = Math.floor(100000 + Math.random() * 900000);
+
+  req.session.signupData = {
+    name,
+    email,
+    password: hashedPassword,
+    otp,
+    createdAt: Date.now()   // ⭐ OTP creation time
+  };
+
+  await transporter.sendMail({
+    from: process.env.EMAIL,
+    to: email,
+    subject: "OTP Verification",
+    text: `Your OTP is ${otp}`
+  });
+
+  res.render("student/otp", { layout: "main/boiler1" });
+
 });
 
+app.post("/student/verify-otp", async (req, res) => {
+
+  const otp =
+    req.body.otp1 +
+    req.body.otp2 +
+    req.body.otp3 +
+    req.body.otp4 +
+    req.body.otp5 +
+    req.body.otp6;
+
+  const sessionData = req.session.signupData;
+
+  if (!sessionData) {
+    return res.redirect("/student/signup");
+  }
+
+  // ⭐ OTP Expiration Check (5 minutes)
+  if (Date.now() - sessionData.createdAt > 300000) {
+    return res.send("OTP expired. Please signup again.");
+  }
+
+  // ⭐ Attempt Counter
+  req.session.otpAttempts = (req.session.otpAttempts || 0) + 1;
+
+  if (req.session.otpAttempts > 3) {
+    return res.send("Too many incorrect attempts. Try again later.");
+  }
+
+  if (otp == sessionData.otp) {
+
+    req.session.verified = true;
+
+    res.redirect("/student/signup/details");
+
+  } else {
+
+    res.render("student/otp", {
+      layout: "main/boiler1",
+      error: "Invalid OTP"
+    });
+
+  }
+
+});
+
+app.get("/student/signup/details", (req, res) => {
+
+    if (!req.session.signupData) {
+        return res.redirect("/student/signup");
+    }
+
+    res.render("student/signup1", {
+        layout: "main/boiler1"
+    });
+
+});
+
+app.get("/student/resend-otp",(req,res)=>{
+   const otp = Math.floor(100000 + Math.random()*900000);
+
+   req.session.signupData.otp = otp;
+
+   sendOtp(req.session.signupData.email, otp);
+
+   res.redirect("/student/otp");
+});
 // Signup submit (profile)
 app.post("/student/signup1/submit2", async (req, res) => {
   const { email, firstName, lastName, regNumber, course, semester, year } = req.body;
@@ -319,10 +441,18 @@ app.post("/student/signup1/submit2", async (req, res) => {
 app.post("/student/login/submit", async (req, res) => {
   const { email, password } = req.body;
 
-  const foundUser = await User.findOne({ email, password });
+  const foundUser = await User.findOne({ email });
+
   if (!foundUser) return res.send("Invalid email or password");
 
+  const isMatch = await bcrypt.compare(password, foundUser.password);
+
+  if (!isMatch) return res.send("Invalid email or password");
+
+  req.session.userEmail = foundUser.email; // store session securely
+
   const profile = await StudentProfile.findOne({ email });
+
   if (!profile) return res.send("Profile not found");
 
   const books = await all.find({ year: profile.year, subject: "English" });
@@ -400,7 +530,7 @@ app.post("/wishlist/add/:email/:id", async (req, res) => {
 });
 
 // View wishlist
-app.get("/wishlist/:email", async (req, res) => {
+app.get("/wishlist/:email",userAuth, async (req, res) => {
   const { email } = req.params;
   const books = await whisl_Book.find({});
   res.render("whish", { layout: "main/boiler2", email, books });
@@ -469,9 +599,7 @@ app.get("/removebooked/:email/:id",async(req,res)=>{
 })
 
 app.post("/booking/add/:email/:id", async (req, res) => {
-
   try {
-
     const { email, id } = req.params;
 
     const book = await all.findById(id);
@@ -485,7 +613,7 @@ app.post("/booking/add/:email/:id", async (req, res) => {
 
     const bookedBook = new booked({
       email: email,
-      username: details.name || "Student",
+      username: details.firstName || "Student",
       title: book.title,
       author: book.author,
       year: book.year,
@@ -509,26 +637,20 @@ app.post("/booking/add/:email/:id", async (req, res) => {
       duedate: dueDate
     });
 
-    // ✅ Send mail AFTER saving (better practice)
+    // 🔥 Save first
     await bookedBook.save();
     await remData.save();
 
-    await sendMail(
-      email,
-      details.name || "Student",
-      book.title,
-      dueDate.toDateString(),
-      "booked"
-    );
-
+    // ✅ Redirect immediately (no waiting for email)
     res.redirect(`/booked/${email}`);
-
   } catch (err) {
-    console.log("Booking Error:", err);
-    res.send("Something went wrong");
+    console.error(err);
+    res.status(500).send("Booking failed");
   }
-
 });
+
+
+    // 📩 Send mail in background (non-blocking)
 app.get("/search/:email", (req, res) => {
   const { email } = req.params;
   res.render("books/search", { layout: "main/boiler2", email });
@@ -543,7 +665,7 @@ app.post("/search/:email/submit", async (req, res) => {
     year: Number(year)
   });
 
-  res.render("books/search1", { layout: "main/boiler2", email, books });
+  res.render("books/search2", { layout: "main/boiler2", email, books });
 });
 
 // ================= DASHBOARD REDIRECT =================
@@ -606,12 +728,15 @@ app.get("/admin/login", (req, res) => {
 
 // Admin Login Submit
 app.post("/admin/login/submit", async (req, res) => {
-  const { email, password } = req.body;
-  const admin = await Admin.findOne({ email, password });
+ const admin = await Admin.findOne({ email });
 
-  if (!admin) return res.send("Invalid admin credentials");
+if (!admin) return res.send("Invalid admin credentials");
 
-  req.session.adminEmail = admin.email;
+const isMatch = await bcrypt.compare(password, admin.password);
+
+if (!isMatch) return res.send("Invalid admin credentials");
+
+req.session.adminEmail = admin.email;
 
   // ✅ redirect with email in URL
   res.redirect(`/admin/adm_dash/${admin.email}`);
@@ -625,7 +750,8 @@ app.get("/admin/signup", (req, res) => {
 // Admin Signup Submit
 app.post("/admin/signup/submit", async (req, res) => {
   const { name, email, password } = req.body;
-  await Admin.create({ name, email, password });
+  const has = await bcrypt.hash(password, 10);
+  await Admin.create({ name, email, password: has });
   res.redirect("/admin/login");
 });
 

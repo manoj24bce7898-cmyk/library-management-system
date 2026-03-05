@@ -1,153 +1,272 @@
 <div class="login-wrapper">
+
     <div class="login-card">
 
-        <h2 class="login-title">Sign In</h2>
+        <h2 class="login-title">Create Account</h2>
 
         <form method="post" action="/student/signup/submit1">
 
             <!-- USERNAME -->
             <div class="input-group">
                 <label>Username</label>
-                <input type="text" name="name" required>
+                <input type="text" name="name" placeholder="Enter username" required>
             </div>
 
             <!-- EMAIL -->
             <div class="input-group">
                 <label>Email</label>
-                <input type="email" name="email" required>
+                <input type="email" name="email" placeholder="Enter email" required>
             </div>
 
             <!-- PASSWORD -->
             <div class="input-group">
                 <label>Password</label>
-                <input type="password" name="password" required>
+                <input type="password" name="password" placeholder="Enter password" required>
             </div>
 
             <button type="submit" class="login-btn">
-                Sign In
+                Continue
             </button>
 
         </form>
 
+        <div class="divider">
+            <span>OR</span>
+        </div>
+
+        <a href="/auth/google">
+            <button class="google-btn">
+                Continue with Google
+            </button>
+        </a>
+
     </div>
+
 </div>
+
+
 <style>
-    /* ============================= */
-/* LOGIN PAGE WRAPPER            */
+
+/* ============================= */
+/* WRAPPER                       */
 /* ============================= */
 
-.login-wrapper {
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: linear-gradient(135deg, #f4f6fb, #e6e9f0);
-    width: 100%;
-    height: 100%;
-    border: 2px solid #ccc;
-    border-radius: 2rem;
-    position: relative;
-    top: 20px;
+.login-wrapper{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    background:linear-gradient(135deg,#f4f6fb,#e6e9f0);
+
+    padding:20px;
 }
 
 /* ============================= */
 /* LOGIN CARD                    */
 /* ============================= */
 
-.login-card {
-    width: 420px;
-    padding: 45px 40px;
-    background: linear-gradient(135deg, #1e1e2f, #2b2b40);
-    border-radius: 24px;
-    box-shadow: 0 30px 80px rgba(0,0,0,0.35);
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
+.login-card{
+
+    width:100%;
+    max-width:420px;
+
+    padding:40px 35px;
+
+    background:linear-gradient(135deg,#1e1e2f,#2b2b40);
+
+    border-radius:22px;
+
+    box-shadow:0 25px 70px rgba(0,0,0,0.35);
+
+    transition:transform 0.3s ease;
 }
 
-.login-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 45px 100px rgba(0,0,0,0.55);
+.login-card:hover{
+    transform:translateY(-5px);
 }
 
 /* ============================= */
 /* TITLE                         */
 /* ============================= */
 
-.login-title {
-    text-align: center;
-    color: #ffffff;
-    font-size: 28px;
-    font-weight: 600;
-    margin-bottom: 35px;
-    letter-spacing: 1.5px;
+.login-title{
+    text-align:center;
+    color:#ffffff;
+    font-size:28px;
+    margin-bottom:30px;
 }
 
 /* ============================= */
 /* INPUT GROUP                   */
 /* ============================= */
 
-.input-group {
-    margin-bottom: 22px;
+.input-group{
+    margin-bottom:20px;
 }
 
-.input-group label {
-    display: block;
-    margin-bottom: 8px;
-    color: #cfcfcf;
-    font-size: 14px;
+.input-group label{
+    display:block;
+    margin-bottom:6px;
+    color:#cfcfcf;
+    font-size:14px;
 }
 
-.input-group input {
-    width: 100%;
-    padding: 14px 16px;
-    border-radius: 12px;
-    border: none;
-    outline: none;
-    font-size: 15px;
-    background: #ffffff;
-    color: #1e1e2f;
+.input-group input{
 
-    transition: 
-        box-shadow 0.3s ease,
-        transform 0.3s ease;
+    width:100%;
+    padding:13px 14px;
+
+    border-radius:10px;
+    border:none;
+    outline:none;
+
+    font-size:15px;
+
+    background:#ffffff;
+    color:#1e1e2f;
+
+    transition:box-shadow 0.3s ease, transform 0.2s ease;
 }
 
-/* INPUT FOCUS EFFECT */
-.input-group input:focus {
-    transform: scale(1.02);
-    box-shadow: 0 0 0 3px rgba(255,183,3,0.45);
+/* INPUT FOCUS */
+
+.input-group input:focus{
+    transform:scale(1.02);
+    box-shadow:0 0 0 3px rgba(255,183,3,0.45);
 }
 
 /* ============================= */
-/* SIGN IN BUTTON                */
+/* MAIN BUTTON                   */
 /* ============================= */
 
-.login-btn {
-    width: 100%;
-    padding: 16px;
-    margin-top: 20px;
+.login-btn{
 
-    border: none;
-    border-radius: 50px;
-    cursor: pointer;
+    width:100%;
+    padding:15px;
 
-    font-size: 17px;
-    font-weight: 600;
-    letter-spacing: 1px;
+    margin-top:10px;
 
-    background: linear-gradient(135deg, #ffb703, #fb8500);
-    color: #1e1e2f;
+    border:none;
+    border-radius:40px;
 
-    box-shadow: 0 15px 35px rgba(255,183,3,0.45);
+    background:linear-gradient(135deg,#ffb703,#fb8500);
 
-    transition: 
-        transform 0.35s ease,
-        box-shadow 0.35s ease;
+    color:#1e1e2f;
+
+    font-weight:600;
+    font-size:16px;
+
+    cursor:pointer;
+
+    box-shadow:0 12px 30px rgba(255,183,3,0.45);
+
+    transition:transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* BUTTON HOVER */
-.login-btn:hover {
-    transform: translateY(-4px) scale(1.03);
-    box-shadow: 0 25px 60px rgba(255,183,3,0.75);
+.login-btn:hover{
+    transform:translateY(-3px) scale(1.02);
+    box-shadow:0 18px 40px rgba(255,183,3,0.7);
+}
+
+/* ============================= */
+/* DIVIDER                       */
+/* ============================= */
+
+.divider{
+    text-align:center;
+    margin:25px 0;
+    color:#aaa;
+    font-size:14px;
+    position:relative;
+}
+
+.divider::before,
+.divider::after{
+    content:"";
+    position:absolute;
+    top:50%;
+    width:40%;
+    height:1px;
+    background:#444;
+}
+
+.divider::before{
+    left:0;
+}
+
+.divider::after{
+    right:0;
+}
+
+/* ============================= */
+/* GOOGLE BUTTON                 */
+/* ============================= */
+
+.google-btn{
+
+    width:100%;
+    padding:14px;
+
+    border:none;
+    border-radius:40px;
+
+    background:#db4437;
+
+    color:white;
+
+    font-weight:600;
+    font-size:15px;
+
+    cursor:pointer;
+
+    transition:transform 0.3s ease;
+}
+
+.google-btn:hover{
+    transform:translateY(-2px);
+}
+
+/* ============================= */
+/* TABLET RESPONSIVE             */
+/* ============================= */
+
+@media(max-width:768px){
+
+.login-card{
+padding:35px 28px;
+}
+
+.login-title{
+font-size:26px;
+}
+
+}
+
+/* ============================= */
+/* MOBILE RESPONSIVE             */
+/* ============================= */
+
+@media(max-width:480px){
+
+.login-card{
+padding:30px 22px;
+}
+
+.login-title{
+font-size:22px;
+}
+
+.input-group input{
+padding:12px;
+}
+
+.login-btn,
+.google-btn{
+font-size:15px;
+padding:13px;
+}
+
 }
 
 </style>

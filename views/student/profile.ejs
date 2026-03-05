@@ -1,246 +1,434 @@
 <div class="profile-page">
 
-    <!-- PROFILE HEADER -->
-    <div class="profile-card">
-        <div class="profile-left">
-            <div class="profile-photo">
-                <img src="/images/profile-default.png" alt="Profile Photo">
-            </div>
-        </div>
+<!-- PROFILE HEADER -->
 
-        <div class="profile-right">
-            <h2><%= profile.firstName %> <%= profile.lastName %></h2>
-            <p class="profile-email"><%= profile.email %></p>
+<div class="profile-card">
 
-            <div class="profile-badges">
-                <span><%= profile.course %></span>
-                <span>Semester <%= profile.semester %></span>
-                <span>Year <%= profile.year %></span>
-            </div>
-        </div>
-    </div>
+<div class="profile-left">
 
-    <!-- DETAILS SECTION -->
-    <div class="details-card">
-        <h3>Profile Details</h3>
-
-        <div class="details-grid">
-            <div class="detail-item">
-                <span>Registration Number</span>
-                <p><%= profile.regNumber %></p>
-            </div>
-
-            <div class="detail-item">
-                <span>Course</span>
-                <p><%= profile.course %></p>
-            </div>
-
-            <div class="detail-item">
-                <span>Semester</span>
-                <p><%= profile.semester %></p>
-            </div>
-
-            <div class="detail-item">
-                <span>Year</span>
-                <p><%= profile.year %></p>
-            </div>
-
-            <div class="detail-item">
-                <span>Email</span>
-                <p><%= profile.email %></p>
-            </div>
-        </div>
-        
-        <button style="position: relative; top: 20px; border: 2px solid #ffb703; border-radius: 2rem; " class="edit-btn" type="submit"><a href="/student/profile/edit/<%= profile.email %>" style="text-decoration: none;" >
-    <i class="fa-solid fa-pen"></i> Edit Details
-</a></button>
-        <button  type="submit" class="btn btn-primary" style="position: relative; top: 13px; left: 20px;"><a href="/" style="text-decoration: none; color: #fefefe;">logout</a></button>
-    </div>
+<div class="profile-photo">
+<img src="/images/profile-default.png" alt="Profile Photo">
+</div>
 
 </div>
+
+<div class="profile-right">
+
+<h2><%= profile.firstName %> <%= profile.lastName %></h2>
+
+<p class="profile-email"><%= profile.email %></p>
+
+<div class="profile-badges">
+<span><%= profile.course %></span>
+<span>Semester <%= profile.semester %></span>
+<span>Year <%= profile.year %></span>
+</div>
+
+</div>
+
+</div>
+
+
+<!-- DETAILS SECTION -->
+
+<div class="details-card">
+
+<h3>Profile Details</h3>
+
+<div class="details-grid">
+
+<div class="detail-item">
+<span>Registration Number</span>
+<p><%= profile.regNumber %></p>
+</div>
+
+<div class="detail-item">
+<span>Course</span>
+<p><%= profile.course %></p>
+</div>
+
+<div class="detail-item">
+<span>Semester</span>
+<p><%= profile.semester %></p>
+</div>
+
+<div class="detail-item">
+<span>Year</span>
+<p><%= profile.year %></p>
+</div>
+
+<div class="detail-item">
+<span>Email</span>
+<p><%= profile.email %></p>
+</div>
+
+</div>
+
+
+<!-- BUTTONS -->
+
+<div class="profile-actions">
+
+<a href="/student/profile/edit/<%= profile.email %>" class="edit-btn">
+<i class="fa-solid fa-pen"></i> Edit Details
+</a>
+
+<a href="/" class="logout-btn">
+Logout
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+
 <style>
-/* ============================= */
-/* STUDENT PROFILE PAGE STYLING */
-/* ============================= */
 
-.profile-page {
-    max-width: 1100px;
-    margin: auto;
-    padding: 40px;
+/* PAGE CONTAINER */
+
+.profile-page{
+max-width:1100px;
+margin:auto;
+padding:40px 20px 80px;
 }
 
-/* PROFILE HEADER CARD */
-.profile-card {
-    background: linear-gradient(135deg, #1e1e2f, #2b2b40);
-    border-radius: 20px;
-    padding: 30px;
-    display: flex;
-    gap: 30px;
-    align-items: center;
-    color: #fff;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.4);
-    transition: transform 0.4s, box-shadow 0.4s;
+
+/* PROFILE HEADER */
+
+.profile-card{
+
+background:linear-gradient(135deg,#1e1e2f,#2b2b40);
+
+border-radius:20px;
+
+padding:30px;
+
+display:flex;
+
+gap:30px;
+
+align-items:center;
+
+color:white;
+
+box-shadow:0 20px 50px rgba(0,0,0,0.4);
+
+transition:transform 0.4s,box-shadow 0.4s;
+
 }
 
-.profile-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 30px 70px rgba(0,0,0,0.6);
+.profile-card:hover{
+transform:translateY(-6px);
+box-shadow:0 30px 70px rgba(0,0,0,0.6);
 }
+
 
 /* PROFILE PHOTO */
-.profile-photo {
-    width: 140px;
-    height: 140px;
-    border-radius: 50%;
-    overflow: hidden;
-    border: 4px solid #ffb703;
+
+.profile-photo{
+
+width:130px;
+height:130px;
+
+border-radius:50%;
+
+overflow:hidden;
+
+border:4px solid #ffb703;
+
 }
 
-.profile-photo img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+.profile-photo img{
+
+width:100%;
+height:100%;
+
+object-fit:cover;
+
 }
 
-/* PROFILE RIGHT */
-.profile-right h2 {
-    margin-bottom: 6px;
-    font-size: 26px;
+
+/* PROFILE TEXT */
+
+.profile-right h2{
+
+font-size:26px;
+
+margin-bottom:6px;
+
 }
 
-.profile-email {
-    color: #dcdcdc;
-    font-size: 14px;
-    margin-bottom: 15px;
+.profile-email{
+
+color:#dcdcdc;
+
+font-size:14px;
+
+margin-bottom:14px;
+
 }
+
 
 /* BADGES */
-.profile-badges {
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
+
+.profile-badges{
+
+display:flex;
+
+gap:10px;
+
+flex-wrap:wrap;
+
 }
 
-.profile-badges span {
-    background: rgba(255,255,255,0.15);
-    padding: 6px 14px;
-    border-radius: 20px;
-    font-size: 13px;
-    transition: background 0.3s;
+.profile-badges span{
+
+background:rgba(255,255,255,0.15);
+
+padding:6px 14px;
+
+border-radius:20px;
+
+font-size:13px;
+
+transition:background 0.3s;
+
 }
 
-.profile-badges span:hover {
-    background: #ffb703;
-    color: #1e1e2f;
+.profile-badges span:hover{
+
+background:#ffb703;
+
+color:#1e1e2f;
+
 }
+
 
 /* DETAILS CARD */
-.details-card {
-    background: rgba(30,30,47,0.9);
-    margin-top: 40px;
-    padding: 30px;
-    border-radius: 18px;
-    color: #fff;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+
+.details-card{
+
+background:rgba(30,30,47,0.9);
+
+margin-top:35px;
+
+padding:30px;
+
+border-radius:18px;
+
+color:white;
+
+box-shadow:0 15px 40px rgba(0,0,0,0.4);
+
 }
 
-.details-card h3 {
-    margin-bottom: 25px;
-    color: #ffb703;
-    letter-spacing: 1px;
+.details-card h3{
+
+margin-bottom:25px;
+
+color:#ffb703;
+
+letter-spacing:1px;
+
 }
 
-/* GRID */
-.details-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 20px;
+
+/* DETAILS GRID */
+
+.details-grid{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+gap:20px;
+
 }
 
-/* DETAIL ITEM */
-.detail-item {
-    background: rgba(255,255,255,0.08);
-    padding: 18px;
-    border-radius: 14px;
-    transition: transform 0.3s, background 0.3s;
+.detail-item{
+
+background:rgba(255,255,255,0.08);
+
+padding:18px;
+
+border-radius:14px;
+
+transition:transform 0.3s,background 0.3s;
+
 }
 
-.detail-item:hover {
-    transform: translateY(-6px);
-    background: rgba(255,183,3,0.15);
+.detail-item:hover{
+
+transform:translateY(-6px);
+
+background:rgba(255,183,3,0.15);
+
 }
 
-.detail-item span {
-    font-size: 12px;
-    color: #bfbfbf;
+.detail-item span{
+
+font-size:12px;
+
+color:#bfbfbf;
+
 }
 
-.detail-item p {
-    font-size: 16px;
-    margin-top: 6px;
+.detail-item p{
+
+font-size:16px;
+
+margin-top:6px;
+
 }
 
-.profile-page {
-    padding-bottom: 80px;   /* space before footer */
+
+/* BUTTON SECTION */
+
+.profile-actions{
+
+display:flex;
+
+gap:15px;
+
+margin-top:30px;
+
+flex-wrap:wrap;
+
 }
 
-/* Ensure footer stays visually separate */
-.footer {
-    margin-top: 60px;
-    position: relative;
-    z-index: 1;
+
+/* EDIT BUTTON */
+
+.edit-btn{
+
+display:inline-flex;
+
+align-items:center;
+
+gap:8px;
+
+padding:12px 26px;
+
+background:linear-gradient(135deg,#ffb703,#fb8500);
+
+color:#1e1e2f;
+
+font-weight:600;
+
+border-radius:30px;
+
+text-decoration:none;
+
+box-shadow:0 10px 25px rgba(255,183,3,0.35);
+
+transition:all 0.3s ease;
+
 }
 
-/* Prevent cards from overlapping footer */
-.profile-card,
-.details-card {
-    position: relative;
-    z-index: 2;
+.edit-btn:hover{
+
+transform:translateY(-3px);
+
+box-shadow:0 18px 40px rgba(255,183,3,0.6);
+
 }
 
-/* ============================= */
-/* EDIT PROFILE BUTTON           */
-/* ============================= */
 
-.edit-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
+/* LOGOUT BUTTON */
 
-    padding: 12px 26px;
-    margin-top: 25px;
+.logout-btn{
 
-    background: linear-gradient(135deg, #ffb703, #fb8500);
-    color: #1e1e2f;
-    font-weight: 600;
-    font-size: 15px;
+padding:12px 24px;
 
-    border-radius: 30px;
-    text-decoration: none;
+background:#ef4444;
 
-    box-shadow: 0 10px 25px rgba(255, 183, 3, 0.35);
-    transition: 
-        transform 0.35s ease,
-        box-shadow 0.35s ease,
-        background 0.35s ease;
-    text-decoration: none;
+color:white;
+
+border-radius:30px;
+
+text-decoration:none;
+
+font-weight:600;
+
+transition:background 0.3s;
+
 }
 
-/* ICON */
-.edit-btn i {
-    transition: transform 0.35s ease;
+.logout-btn:hover{
+
+background:#dc2626;
+
 }
 
-/* HOVER EFFECT */
-.edit-btn:hover {
-    transform: translateY(-4px) scale(1.04);
-    box-shadow: 0 18px 40px rgba(255, 183, 3, 0.6);
-    background: linear-gradient(135deg, #ffd166, #ff9f1c);
+
+/* TABLET */
+
+@media(max-width:768px){
+
+.profile-card{
+
+flex-direction:column;
+
+text-align:center;
+
 }
 
-/* ICON ROTATION ON HOVER */
-.edit-btn:hover i {
-    transform: rotate(-15deg) scale(1.1);
+.profile-photo{
+
+width:110px;
+height:110px;
+
+}
+
+.profile-right h2{
+
+font-size:22px;
+
+}
+
+}
+
+
+/* MOBILE */
+
+@media(max-width:480px){
+
+.profile-page{
+
+padding:30px 15px 70px;
+
+}
+
+.profile-photo{
+
+width:90px;
+height:90px;
+
+}
+
+.profile-right h2{
+
+font-size:20px;
+
+}
+
+.profile-actions{
+
+flex-direction:column;
+
+}
+
+.edit-btn,
+.logout-btn{
+
+width:100%;
+text-align:center;
+justify-content:center;
+
+}
+
 }
 
 </style>

@@ -1,0 +1,247 @@
+<div class="login-wrapper">
+
+    <div class="login-card">
+
+        <h2 class="login-title">Email Verification</h2>
+
+        <p class="otp-info">
+            Enter the 6-digit OTP sent to your email
+        </p>
+
+        <form method="POST" action="/student/verify-otp">
+
+            <div class="otp-container">
+
+                <input type="text" name="otp1" maxlength="1" class="otp-input" required>
+                <input type="text" name="otp2" maxlength="1" class="otp-input" required>
+                <input type="text" name="otp3" maxlength="1" class="otp-input" required>
+                <input type="text" name="otp4" maxlength="1" class="otp-input" required>
+                <input type="text" name="otp5" maxlength="1" class="otp-input" required>
+                <input type="text" name="otp6" maxlength="1" class="otp-input" required>
+
+            </div>
+
+            <input type="hidden" name="otp">
+
+            <button type="submit" class="login-btn">
+                Verify OTP
+            </button>
+
+        </form>
+
+        <div class="resend">
+            <a href="/student/resend-otp">Resend OTP</a>
+        </div>
+
+    </div>
+
+</div>
+
+
+<style>
+
+/* PAGE WRAPPER */
+
+.login-wrapper{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#f4f6fb,#e6e9f0);
+    padding:20px;
+}
+
+/* CARD */
+
+.login-card{
+
+    width:100%;
+    max-width:420px;
+
+    padding:40px 35px;
+
+    background:linear-gradient(135deg,#1e1e2f,#2b2b40);
+
+    border-radius:24px;
+
+    box-shadow:0 25px 70px rgba(0,0,0,0.35);
+
+    text-align:center;
+
+}
+
+/* TITLE */
+
+.login-title{
+    color:white;
+    font-size:28px;
+    margin-bottom:8px;
+}
+
+/* INFO TEXT */
+
+.otp-info{
+    color:#cfcfcf;
+    margin-bottom:25px;
+    font-size:14px;
+}
+
+/* OTP CONTAINER */
+
+.otp-container{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:12px;
+
+    margin-bottom:25px;
+
+    flex-wrap:wrap;
+
+}
+
+/* OTP INPUT */
+
+.otp-input{
+
+    width:50px;
+
+    height:55px;
+
+    text-align:center;
+
+    font-size:22px;
+
+    border:none;
+
+    border-radius:12px;
+
+    outline:none;
+
+    background:white;
+
+    transition:0.25s;
+
+}
+
+.otp-input:focus{
+
+    box-shadow:0 0 0 3px rgba(255,183,3,0.45);
+
+    transform:scale(1.05);
+
+}
+
+/* BUTTON */
+
+.login-btn{
+
+    width:100%;
+
+    padding:15px;
+
+    border:none;
+
+    border-radius:50px;
+
+    background:linear-gradient(135deg,#ffb703,#fb8500);
+
+    color:#1e1e2f;
+
+    font-weight:600;
+
+    font-size:16px;
+
+    cursor:pointer;
+
+    transition:transform 0.25s;
+
+}
+
+.login-btn:hover{
+
+    transform:translateY(-2px);
+
+}
+
+/* RESEND LINK */
+
+.resend{
+
+    margin-top:20px;
+
+}
+
+.resend a{
+
+    color:#ffb703;
+
+    text-decoration:none;
+
+    font-size:14px;
+
+}
+
+/* TABLET */
+
+@media(max-width:768px){
+
+.login-card{
+padding:35px 30px;
+}
+
+.login-title{
+font-size:24px;
+}
+
+}
+
+/* MOBILE */
+
+@media(max-width:480px){
+
+.login-card{
+padding:28px 22px;
+}
+
+.login-title{
+font-size:22px;
+}
+
+.otp-input{
+
+width:40px;
+height:48px;
+
+font-size:18px;
+
+}
+
+}
+
+</style>
+
+
+<script>
+
+/* Auto move OTP cursor */
+
+const inputs = document.querySelectorAll(".otp-input");
+
+inputs.forEach((input,index)=>{
+
+input.addEventListener("input",()=>{
+
+if(input.value.length === 1 && inputs[index+1]){
+
+inputs[index+1].focus();
+
+}
+
+});
+
+});
+
+</script>

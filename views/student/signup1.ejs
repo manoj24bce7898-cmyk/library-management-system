@@ -1,76 +1,166 @@
+<div class="signup-wrapper">
 
-  <div style="position: relative; top: 20px;  width: 100%; height: 100%; border: 2px solid #ccc; border-radius: 2rem; " class="form-card">
+  <div class="form-card">
+
     <form class="row g-3" method="post" action="/student/signup1/submit2">
-      <h1>Provide further details: </h1>
-      <div class="col-md-12">
-    <label for="inputfist" class="form-label">Enter email:</label>
-    <input type="text" class="form-control" id="inputfist" name="email">
-  </div>
-        <div class="col-md-6">
-    <label for="inputfist" class="form-label">first name:</label>
-    <input type="text" class="form-control" id="inputfist" name="firstName">
-  </div>
-  <div class="col-md-6">
-    <label for="inputlast" class="form-label">Last name:</label>
-    <input type="text" class="form-control" id="inputlast" name="lastName">
-  </div>
-  <div class="col-md-6">
-    <label for="inputEmail4" class="form-label">Reg number:</label>
-    <input type="text" class="form-control" id="inputEmail4" name="regNumber">
-  </div>
-  <div class="col-md-6">
-    <label for="inputPassword4" class="form-label">course:</label>
-    <input type="text" class="form-control" id="inputPassword4" name="course">
-  </div>
-  <div class="col-md-6">
-    <label for="inputYear" class="form-label">Year</label>
-    <select id="inputYear" class="form-select" name="year">
-      <option selected>Choose...</option>
-      <option>1</option>
-      <option>2</option>
-      <option>3</option>
-      <option>4</option>
-    </select>
-  <div class="col-md-6">
-    <label for="inputState" class="form-label">Semester</label>
-    <select id="inputState" class="form-select" name="semester">
-      <option selected>Choose...</option>
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-        <option>5</option>
-        <option>6</option>
-        <option>7</option>
-        <option>8</option>
-    </select>
-  </div>
-  <div class="col-12">
-    <button type="submit" class="btn btn-primary" style="position: relative; left: 420px;">Sign in</button>
-  </div>
-</form>
-  </div>
-  <style>
-    /* ============================= */
-/* FORM CARD (OUTER BOX)         */
-/* ============================= */
 
-.form-card {
-    background: linear-gradient(135deg, #1e1e2f, #2b2b40);
-    border-radius: 20px;
-    padding: 35px;
+      <h2 class="form-title">Provide Further Details</h2>
 
-    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45);
-    transition: 
-        transform 0.4s ease,
-        box-shadow 0.4s ease;
-    color: #ffffff;
+      <div class="col-12">
+        <label class="form-label">Enter Email</label>
+        <input type="text" class="form-control" name="email">
+      </div>
+
+      <div class="col-md-6 col-12">
+        <label class="form-label">First Name</label>
+        <input type="text" class="form-control" name="firstName">
+      </div>
+
+      <div class="col-md-6 col-12">
+        <label class="form-label">Last Name</label>
+        <input type="text" class="form-control" name="lastName">
+      </div>
+
+      <div class="col-md-6 col-12">
+        <label class="form-label">Reg Number</label>
+        <input type="text" class="form-control" name="regNumber">
+      </div>
+
+      <div class="col-md-6 col-12">
+        <label class="form-label">Course</label>
+        <input type="text" class="form-control" name="course">
+      </div>
+
+      <div class="col-md-6 col-12">
+        <label class="form-label">Year</label>
+        <select class="form-select" name="year">
+          <option selected>Choose...</option>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+        </select>
+      </div>
+
+      <div class="col-md-6 col-12">
+        <label class="form-label">Semester</label>
+        <select class="form-select" name="semester">
+          <option selected>Choose...</option>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+          <option>6</option>
+          <option>7</option>
+          <option>8</option>
+        </select>
+      </div>
+
+      <div class="col-12 text-center">
+        <button type="submit" class="submit-btn">Continue</button>
+      </div>
+
+    </form>
+
+  </div>
+
+</div>
+
+
+<style>
+
+/* WRAPPER */
+
+.signup-wrapper{
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:linear-gradient(135deg,#f4f6fb,#e6e9f0);
+  padding:20px;
 }
 
-/* HOVER EFFECT */
-.form-card:hover {
-    transform: translateY(-10px) scale(1.01);
-    box-shadow: 0 35px 90px rgba(0, 0, 0, 0.7);
+/* FORM CARD */
+
+.form-card{
+  width:100%;
+  max-width:700px;
+  background:linear-gradient(135deg,#1e1e2f,#2b2b40);
+  border-radius:20px;
+  padding:40px;
+  color:white;
+  box-shadow:0 25px 60px rgba(0,0,0,0.45);
+  transition:transform 0.3s ease;
 }
 
-  </style>
+.form-card:hover{
+  transform:translateY(-6px);
+}
+
+/* TITLE */
+
+.form-title{
+  text-align:center;
+  margin-bottom:25px;
+  font-size:26px;
+}
+
+/* INPUTS */
+
+.form-control,
+.form-select{
+  border-radius:10px;
+  padding:12px;
+}
+
+/* BUTTON */
+
+.submit-btn{
+  margin-top:20px;
+  padding:14px 40px;
+  border:none;
+  border-radius:40px;
+  background:linear-gradient(135deg,#ffb703,#fb8500);
+  font-weight:600;
+  cursor:pointer;
+  transition:transform 0.3s ease;
+}
+
+.submit-btn:hover{
+  transform:scale(1.05);
+}
+
+/* TABLET */
+
+@media(max-width:768px){
+
+.form-card{
+padding:30px;
+}
+
+.form-title{
+font-size:24px;
+}
+
+}
+
+/* MOBILE */
+
+@media(max-width:480px){
+
+.form-card{
+padding:25px 20px;
+}
+
+.form-title{
+font-size:22px;
+}
+
+.submit-btn{
+width:100%;
+}
+
+}
+
+</style>

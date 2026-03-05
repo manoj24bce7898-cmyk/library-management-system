@@ -1,273 +1,334 @@
-
 <div class="HEADER1">
-    <h1 id="typing-heading2" class="typing-heading"></h1>
-    <p>Here are some books recommended for you:</p>
+
+<h1 id="typing-heading2" class="typing-heading"></h1>
+
+<p class="subtext">Here are some books recommended for you</p>
+
 </div>
+
+
 <div class="book-recommendations">
 
 <h2 id="typing-heading" class="typing-heading"></h2>
+
 <hr>
+
 <div class="book-grid">
-  <% books.forEach(book => { %>
-    <div class="book-card">
-      
-      <div class="book-image">
-        <img src="<%= book.bookImage %>" alt="<%= book.title %>">
-      </div>
 
-      <div class="book-content">
-        <h3 class="book-title"><%= book.title %></h3>
-        <p class="book-author">by <%= book.author %></p>
+<% books.forEach(book => { %>
 
-        <div class="book-meta">
-          <span>Year <%= book.year %></span>
-          <span>Sem <%= book.semester %></span>
-          <span><%= book.subject %></span>
-        </div>
+<div class="book-card">
 
-        <p class="book-desc">
-          <%= book.description %>
-        </p>
-
-        <a href="/books/<%= book._id %>/<%= profile.email %>" class="book-btn">
-          View Details
-        </a>
-      </div>
-
-    </div>
-  <% }) %>
+<div class="book-image">
+<img src="<%= book.bookImage %>" alt="<%= book.title %>">
 </div>
+
+<div class="book-content">
+
+<h3 class="book-title"><%= book.title %></h3>
+
+<p class="book-author">by <%= book.author %></p>
+
+<div class="book-meta">
+<span>Year <%= book.year %></span>
+<span>Sem <%= book.semester %></span>
+<span><%= book.subject %></span>
+</div>
+
+<p class="book-desc">
+<%= book.description %>
+</p>
+
+<a href="/books/<%= book._id %>/<%= profile.email %>" class="book-btn">
+View Details
+</a>
+
+</div>
+
+</div>
+
+<% }) %>
+
+</div>
+
 <hr>
-<h1 id="typing-heading1" class="typing-heading"></h1>
+
+<h2 id="typing-heading1" class="typing-heading"></h2>
+
 <hr>
+
 <div class="book-grid">
-    <% mathBooks.forEach(book => { %>
-    <div class="book-card">
-      
-      <div class="book-image">
-        <img src="<%= book.bookImage %>" alt="<%= book.title %>">
-      </div>
 
-      <div class="book-content">
-        <h3 class="book-title"><%= book.title %></h3>
-        <p class="book-author">by <%= book.author %></p>
+<% mathBooks.forEach(book => { %>
 
-        <div class="book-meta">
-          <span>Year <%= book.year %></span>
-          <span>Sem <%= book.semester %></span>
-          <span><%= book.subject %></span>
-        </div>
+<div class="book-card">
 
-        <p class="book-desc">
-          <%= book.description %>
-        </p>
-
-        <a href="/books/<%= book._id %>/<%= profile.email %>" class="book-btn">
-          View Details
-        </a>
-      </div>
-
-    </div>
-  <% }) %>
+<div class="book-image">
+<img src="<%= book.bookImage %>" alt="<%= book.title %>">
 </div>
+
+<div class="book-content">
+
+<h3 class="book-title"><%= book.title %></h3>
+
+<p class="book-author">by <%= book.author %></p>
+
+<div class="book-meta">
+<span>Year <%= book.year %></span>
+<span>Sem <%= book.semester %></span>
+<span><%= book.subject %></span>
 </div>
-<hr>
+
+<p class="book-desc">
+<%= book.description %>
+</p>
+
+<a href="/books/<%= book._id %>/<%= profile.email %>" class="book-btn">
+View Details
+</a>
+
+</div>
+
+</div>
+
+<% }) %>
+
+</div>
+
+</div>
+
+
 <style>
 
-.HEADER1 {
-  width: 100%;
-  height: 100%;
-  border: 2px solid #ccc;
-  text-align: center;
-  margin-top: 20px;
-  color: #1f2937; /* dark gray */
-  border-radius: 2rem;
-  background: linear-gradient(135deg, #f4f6fb, #e6e9f0);
-  display: flex;
-  flex-direction: column;
-  padding: auto;
-}
-.typing-heading {
-  font-size: 28px;
-  font-weight: 600;
-  color: #1f2937; /* dark gray */
-  letter-spacing: 0.5px;
-  min-height: 40px; /* prevents layout jump */
-  position: relative;
-  padding: 10px;
-  left: 10px;
-  margin-top: 15px;
+/* HEADER */
+
+.HEADER1{
+width:100%;
+border:2px solid #ccc;
+text-align:center;
+margin-top:20px;
+color:#1f2937;
+border-radius:2rem;
+background:linear-gradient(135deg,#f4f6fb,#e6e9f0);
+padding:25px 20px;
 }
 
-.book-recommendations {
-  margin-top: 30px;
-  width: 100%;
-  height: 100%;
-  border: 2px solid #ccc;
-  border-radius: 2rem;
-  background: linear-gradient(135deg, #f4f6fb, #e6e9f0);
-  display: flex;
-  flex-direction: column;
-  padding: auto;
+.subtext{
+font-size:15px;
+color:#4b5563;
+margin-top:5px;
 }
-    /* GRID LAYOUT */
-.book-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 35px;
-  padding: 40px;
+
+/* TYPING TEXT */
+
+.typing-heading{
+font-size:28px;
+font-weight:600;
+color:#1f2937;
+min-height:40px;
+margin-top:10px;
+}
+
+/* MAIN CONTAINER */
+
+.book-recommendations{
+margin-top:30px;
+width:100%;
+border:2px solid #ccc;
+border-radius:2rem;
+background:linear-gradient(135deg,#f4f6fb,#e6e9f0);
+padding:20px;
+}
+
+/* GRID */
+
+.book-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:30px;
+padding:30px 10px;
 }
 
 /* CARD */
-.book-card {
-  background: linear-gradient(180deg, #1e1e2f, #26263d);
-  border-radius: 18px;
-  overflow: hidden;
-  box-shadow: 0 15px 35px rgba(0,0,0,0.45);
-  transition: all 0.4s ease;
-  transform-style: preserve-3d;
-  position: relative;
+
+.book-card{
+background:linear-gradient(180deg,#1e1e2f,#26263d);
+border-radius:18px;
+overflow:hidden;
+box-shadow:0 15px 35px rgba(0,0,0,0.45);
+transition:all 0.35s ease;
 }
 
-/* HOVER EFFECT */
-.book-card:hover {
-  transform: translateY(-12px) scale(1.03);
-  box-shadow: 0 25px 55px rgba(0,0,0,0.7);
+.book-card:hover{
+transform:translateY(-10px) scale(1.02);
+box-shadow:0 25px 55px rgba(0,0,0,0.7);
 }
 
 /* IMAGE */
-.book-image {
-  height: 260px;
-  overflow: hidden;
+
+.book-image{
+height:240px;
+overflow:hidden;
 }
 
-.book-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.6s ease;
+.book-image img{
+width:100%;
+height:100%;
+object-fit:cover;
+transition:transform 0.5s ease;
 }
 
-.book-card:hover img {
-  transform: scale(1.12);
+.book-card:hover img{
+transform:scale(1.1);
 }
 
 /* CONTENT */
-.book-content {
-  padding: 20px;
-  color: #eaeaea;
+
+.book-content{
+padding:18px;
+color:#eaeaea;
 }
 
 /* TITLE */
-.book-title {
-  font-size: 18px;
-  font-weight: 600;
-  margin-bottom: 6px;
+
+.book-title{
+font-size:18px;
+font-weight:600;
+margin-bottom:6px;
 }
 
 /* AUTHOR */
-.book-author {
-  font-size: 14px;
-  color: #b5b5b5;
-  margin-bottom: 12px;
+
+.book-author{
+font-size:14px;
+color:#b5b5b5;
+margin-bottom:12px;
 }
 
-/* META INFO */
-.book-meta {
-  display: flex;
-  gap: 10px;
-  font-size: 12px;
-  margin-bottom: 12px;
+/* META */
+
+.book-meta{
+display:flex;
+flex-wrap:wrap;
+gap:8px;
+font-size:12px;
+margin-bottom:12px;
 }
 
-.book-meta span {
-  background: rgba(255,255,255,0.08);
-  padding: 4px 8px;
-  border-radius: 8px;
+.book-meta span{
+background:rgba(255,255,255,0.08);
+padding:4px 8px;
+border-radius:8px;
 }
 
 /* DESCRIPTION */
-.book-desc {
-  font-size: 13px;
-  line-height: 1.6;
-  color: #cfcfcf;
-  margin-bottom: 16px;
+
+.book-desc{
+font-size:13px;
+line-height:1.6;
+color:#cfcfcf;
+margin-bottom:16px;
 }
 
 /* BUTTON */
-.book-btn {
-  display: inline-block;
-  text-decoration: none;
-  padding: 10px 18px;
-  border-radius: 25px;
-  background: linear-gradient(135deg, #ffb703, #fb8500);
-  color: #111;
-  font-size: 13px;
-  font-weight: 600;
-  transition: all 0.35s ease;
+
+.book-btn{
+display:inline-block;
+text-decoration:none;
+padding:10px 18px;
+border-radius:25px;
+background:linear-gradient(135deg,#ffb703,#fb8500);
+color:#111;
+font-size:13px;
+font-weight:600;
+transition:all 0.3s ease;
 }
 
-.book-btn:hover {
-  background: linear-gradient(135deg, #ffd166, #f77f00);
-  transform: translateY(-2px);
+.book-btn:hover{
+background:linear-gradient(135deg,#ffd166,#f77f00);
+transform:translateY(-2px);
+}
+
+/* TABLET */
+
+@media(max-width:768px){
+
+.typing-heading{
+font-size:24px;
+}
+
+.book-grid{
+gap:22px;
+padding:20px 10px;
+}
+
+}
+
+/* MOBILE */
+
+@media(max-width:480px){
+
+.typing-heading{
+font-size:20px;
+}
+
+.book-grid{
+grid-template-columns:1fr;
+gap:20px;
+padding:15px 5px;
+}
+
+.book-image{
+height:200px;
+}
+
 }
 
 </style>
 
+
 <script>
-  const text = "Books recommended for  English : ";
-  const heading = document.getElementById("typing-heading");
-  const text1 = "Books recommended for Mathematics: ";
-  const heading1 = document.getElementById("typing-heading1");
-  const heading2 = document.getElementById("typing-heading2");
-  const text2 = "Welcome back, <%= profile.firstName %>!";
 
-  let index = 0;
+const text = "📚 English Books";
+const heading = document.getElementById("typing-heading");
 
-  function typeText() {
-    if (index < text.length) {
-      heading.textContent += text.charAt(index);
-      index++;
-      setTimeout(typeText, 50); // typing speed
-    } else {
-      setTimeout(() => {
-        heading.textContent = "";
-        index = 0;
-        setTimeout(typeText, 600); // delay before restart
-      }, 1200); // pause after full text
-    }
-  }
-  let index1 = 0;
-  function typeText1() {
-    if (index1 < text1.length) {
-      heading1.textContent += text1.charAt(index1);
-      index1++;
-      setTimeout(typeText1, 50); // typing speed
-    } else {
-      setTimeout(() => {
-        heading1.textContent = "";
-        index1 = 0;
-        setTimeout(typeText1, 600); // delay before restart
-      }, 1200); // pause after full text
-    }
-  }
-  let index2 = 0;
-  function typeText2() {
-    if (index2 < text2.length) {
-      heading2.textContent += text2.charAt(index2);
-      index2++;
-      setTimeout(typeText2, 50); // typing speed
-    } else {
-      setTimeout(() => {
-        heading2.textContent = "";
-        index2 = 0;
-        setTimeout(typeText2, 600); // delay before restart
-      }, 1200); // pause after full text
-    }
-  }
-  setTimeout(typeText2, 600); 
-  setTimeout(typeText1, 600);
-  // Start typing after 0.6s when page loads
-  setTimeout(typeText, 600);
+const text1 = "📘 Mathematics Books";
+const heading1 = document.getElementById("typing-heading1");
+
+const text2 = "Welcome back, <%= profile.firstName %>!";
+const heading2 = document.getElementById("typing-heading2");
+
+
+function typeEffect(text, element){
+
+let index = 0;
+
+function type(){
+
+if(index < text.length){
+
+element.textContent += text.charAt(index);
+index++;
+setTimeout(type,50);
+
+}else{
+
+setTimeout(()=>{
+element.textContent="";
+index=0;
+type();
+},1500);
+
+}
+
+}
+
+type();
+
+}
+
+typeEffect(text,heading);
+typeEffect(text1,heading1);
+typeEffect(text2,heading2);
+
 </script>
-

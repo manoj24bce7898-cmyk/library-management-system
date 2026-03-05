@@ -1,62 +1,211 @@
-<div class="header">
-    <form action="/search/<%= email %>/submit" method="post">
-    <div class="col-md-6">
-        <label for="inputsub" class="form-label">Enter subject:</label>
-        <select id="inputYear" class="form-select" name="sub" >
-            <option selected>Choose...</option>
-            <option>English</option>
-            <option>Mathematics</option>
-            <option>Chemistry</option>
-            <option>Physics</option>
-        </select>
-    </div>
-    <div class="col-md-6">
-        <label for="inputsub" class="form-label">Enter year:</label>
-        <select id="inputYear" class="form-select" name="year">
-            <option selected>Choose...</option>
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-        </select>
-    </div>
-    <button type="submit" class="btn btn-primary" style="position: relative; top: 10px; left: 5px;">Search</button>
-    </form>
+<div class="search-header">
+
+<form action="/search/<%= email %>/submit" method="post" class="search-form">
+
+<div class="form-group">
+
+<label for="subject" class="form-label">Enter subject:</label>
+
+<select id="subject" class="form-select" name="sub">
+
+<option selected disabled>Choose...</option>
+<option>English</option>
+<option>Mathematics</option>
+<option>Chemistry</option>
+<option>Physics</option>
+
+</select>
+
 </div>
 
 
+<div class="form-group">
+
+<label for="year" class="form-label">Enter year:</label>
+
+<select id="year" class="form-select" name="year">
+
+<option selected disabled>Choose...</option>
+<option>1</option>
+<option>2</option>
+<option>3</option>
+<option>4</option>
+
+</select>
+
+</div>
+
+
+<div class="form-group btn-group">
+
+<button type="submit" class="search-btn">
+
+Search
+
+</button>
+
+</div>
+
+</form>
+
+</div>
+
+
+
 <style>
-.header {
-    width: 100%;
-    height: 100%;
-    margin-top: 20px;
-    margin-bottom: 30px;
-    padding: 20px;
-    background: linear-gradient(135deg, #1e1e2f, #2b2b40);
-    border-radius: 15px;
-    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45);
-    color: #ffffff;
-    gap: 20px;
+
+/* HEADER CARD */
+
+.search-header{
+
+width:100%;
+
+margin-top:20px;
+
+margin-bottom:30px;
+
+padding:25px;
+
+background:linear-gradient(135deg,#1e1e2f,#2b2b40);
+
+border-radius:15px;
+
+box-shadow:0 25px 60px rgba(0,0,0,0.45);
+
+color:#fff;
+
+transition:0.3s;
+
 }
 
-.form-label {
-    color: #eaeaea;
+.search-header:hover{
+
+transform:translateY(-6px);
+
+box-shadow:0 35px 90px rgba(0,0,0,0.7);
+
 }
 
-.form-select {
-    background: #2b2b40;
-    color: #eaeaea;
-    border: 2px solid #ffb703;
-    border-radius: 8px;
-    padding: 10px;
+
+/* FORM LAYOUT */
+
+.search-form{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+gap:20px;
+
+align-items:end;
+
 }
 
-.form-select:hover {
-    background: #3a3a55;
+
+/* LABEL */
+
+.form-label{
+
+color:#eaeaea;
+
+font-size:14px;
+
+margin-bottom:6px;
+
+display:block;
+
 }
-/* HOVER EFFECT */
-.header:hover {
-    transform: translateY(-10px) scale(1.01);
-    box-shadow: 0 35px 90px rgba(0, 0, 0, 0.7);
+
+
+/* SELECT */
+
+.form-select{
+
+width:100%;
+
+background:#2b2b40;
+
+color:#eaeaea;
+
+border:2px solid #ffb703;
+
+border-radius:8px;
+
+padding:10px;
+
+font-size:14px;
+
+transition:0.3s;
+
 }
+
+.form-select:hover{
+
+background:#3a3a55;
+
+}
+
+
+/* BUTTON */
+
+.search-btn{
+
+padding:10px 22px;
+
+border:none;
+
+border-radius:25px;
+
+background:linear-gradient(135deg,#ffb703,#fb8500);
+
+color:#111;
+
+font-weight:600;
+
+cursor:pointer;
+
+transition:0.3s;
+
+}
+
+.search-btn:hover{
+
+transform:translateY(-2px);
+
+background:linear-gradient(135deg,#ffd166,#f77f00);
+
+}
+
+
+/* TABLET */
+
+@media(max-width:768px){
+
+.search-header{
+
+padding:20px;
+
+}
+
+}
+
+
+/* MOBILE */
+
+@media(max-width:480px){
+
+.search-form{
+
+grid-template-columns:1fr;
+
+}
+
+.search-btn{
+
+width:100%;
+
+}
+
+}
+
 </style>

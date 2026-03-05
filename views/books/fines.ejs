@@ -1,147 +1,345 @@
-<!-- Razorpay Checkout Script -->
-<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
-<div class="container mt-4">
+<!-- Razorpay Checkout -->
+<div class="fine-page">
 
-  <h2 class="mb-4">Overdue Books & Fines</h2>
+<div class="fine-header">
+<h2>Overdue Books & Fines</h2>
+</div>
 
-  <% if (overdueBooks.length === 0) { %>
+<% if (overdueBooks.length === 0) { %>
 
-      <div class="alert alert-success">
-        No fines pending 🎉
-      </div>
+<div class="no-fine">
+No fines pending 🎉
+</div>
 
-  <% } else { %>
+<% } else { %>
 
-      <table class="table table-bordered table-striped">
+<div class="table-wrapper">
 
-        <thead class="table-dark">
-          <tr>
-            <th>Title</th>
-            <th>Author</th>
-            <th>Due Date</th>
-            <th>Fine Amount</th>
-            <th>Action</th>
-          </tr>
-        </thead>
+<table class="fine-table">
 
-        <tbody>
+<thead>
 
-          <% overdueBooks.forEach(book => { %>
+<tr>
+<th>Title</th>
+<th>Author</th>
+<th>Due Date</th>
+<th>Fine</th>
+<th>Action</th>
+</tr>
 
-            <tr>
+</thead>
 
-              <td><%= book.title %></td>
+<tbody>
 
-              <td><%= book.author %></td>
+<% overdueBooks.forEach(book => { %>
 
-              <td>
-                <%= new Date(book.duedate).toLocaleDateString() %>
-              </td>
+<tr>
 
-              <td>
-                ₹<%= book.fineAmount %>
-              </td>
+<td><%= book.title %></td>
 
-              <td>
+<td><%= book.author %></td>
 
-                <button 
-                  class="btn btn-danger"
-                  onclick="payFine('<%= book._id %>', <%= book.fineAmount %>)"
-                >
-                  Pay Now
-                </button>
+<td>
+<%= new Date(book.duedate).toLocaleDateString() %>
+</td>
 
-              </td>
+<td class="fine-amount">
+₹<%= book.fineAmount %>
+</td>
 
-            </tr>
+<td>
 
-          <% }) %>
+<button 
+class="pay-btn">
+Pay Now 
+</button>
+</td>
 
-        </tbody>
+</tr>
 
-      </table>
+<% }) %>
 
-  <% } %>
+</tbody>
+
+</table>
+
+</div>
+
+<% } %>
 
 </div>
 
 
+<style>
+
+/* PAGE */
+
+.fine-page{
+
+max-width:1100px;
+
+margin:auto;
+
+padding:40px 20px;
+
+}
+
+
+/* HEADER */
+
+.fine-header{
+
+padding:25px;
+
+border-radius:20px;
+
+text-align:center;
+
+background:linear-gradient(135deg,#f4f6fb,#e6e9f0);
+
+border:2px solid #ccc;
+
+margin-bottom:30px;
+
+}
+
+.fine-header h2{
+
+font-size:28px;
+
+color:#1f2937;
+
+}
+
+
+/* NO FINE MESSAGE */
+
+.no-fine{
+
+padding:25px;
+
+background:#d1fae5;
+
+color:#065f46;
+
+border-radius:14px;
+
+text-align:center;
+
+font-weight:600;
+
+}
+
+
+/* TABLE WRAPPER */
+
+.table-wrapper{
+
+overflow-x:auto;
+
+}
+
+
+/* TABLE */
+
+.fine-table{
+
+width:100%;
+
+border-collapse:collapse;
+
+background:white;
+
+border-radius:16px;
+
+overflow:hidden;
+
+box-shadow:0 10px 25px rgba(0,0,0,0.15);
+
+}
+
+.fine-table thead{
+
+background:#1e1e2f;
+
+color:white;
+
+}
+
+.fine-table th,
+.fine-table td{
+
+padding:14px 16px;
+
+text-align:left;
+
+border-bottom:1px solid #e5e7eb;
+
+}
+
+
+/* FINE AMOUNT */
+
+.fine-amount{
+
+font-weight:600;
+
+color:#ef4444;
+
+}
+
+
+/* PAY BUTTON */
+
+.pay-btn{
+
+padding:8px 18px;
+
+border:none;
+
+border-radius:25px;
+
+background:linear-gradient(135deg,#ffb703,#fb8500);
+
+color:#111;
+
+font-weight:600;
+
+cursor:pointer;
+
+transition:all 0.3s;
+
+}
+
+.pay-btn:hover{
+
+transform:translateY(-2px);
+
+background:linear-gradient(135deg,#ffd166,#f77f00);
+
+}
+
+
+/* TABLET */
+
+@media(max-width:768px){
+
+.fine-header h2{
+
+font-size:24px;
+
+}
+
+.fine-table th,
+.fine-table td{
+
+padding:12px;
+
+font-size:14px;
+
+}
+
+}
+
+
+/* MOBILE */
+
+@media(max-width:480px){
+
+.fine-page{
+
+padding:25px 12px;
+
+}
+
+.fine-header h2{
+
+font-size:20px;
+
+}
+
+.pay-btn{
+
+width:100%;
+
+}
+
+}
+
+</style>
+
+
+
 <script>
 
-const RAZORPAY_KEY_ID = "rzp_test_AbCdEfGh12345"; // example: rzp_test_xxxxxx
+const RAZORPAY_KEY_ID = "rzp_test_AbCdEfGh12345";
 
 
-async function payFine(bookId, fineAmount)
-{
+async function payFine(bookId,fineAmount){
 
-  try
-  {
+try{
 
-    // Create order from backend
-    const res = await fetch(`/create-payment/${bookId}`, {
-      method: "POST"
-    });
+const res = await fetch(`/create-payment/${bookId}`,{
+method:"POST"
+});
 
-    const data = await res.json();
+const data = await res.json();
 
 
-    const options =
-    {
-      key: RAZORPAY_KEY_ID,
+const options={
 
-      amount: data.amount,
+key:RAZORPAY_KEY_ID,
 
-      currency: "INR",
+amount:data.amount,
 
-      name: "Library Management System",
+currency:"INR",
 
-      description: "Overdue Book Fine",
+name:"Library Management System",
 
-      order_id: data.orderId,
+description:"Overdue Book Fine",
 
-
-      handler: async function (response)
-      {
-
-        console.log("Payment success:", response);
-
-        await fetch(`/payment-success/${bookId}`, {
-          method: "POST"
-        });
-
-        alert("Payment Successful ✅");
-
-        window.location.reload();
-
-      },
+order_id:data.orderId,
 
 
-      prefill:
-      {
-        name: "<%= profile.firstName %>",
-        email: "<%= profile.email %>"
-      },
+handler:async function(response){
+
+await fetch(`/payment-success/${bookId}`,{
+method:"POST"
+});
+
+alert("Payment Successful ✅");
+
+window.location.reload();
+
+},
 
 
-      theme:
-      {
-        color: "#0d6efd"
-      }
+prefill:{
+name:"<%= profile.firstName %>",
+email:"<%= profile.email %>"
+},
 
-    };
+theme:{
+color:"#0d6efd"
+}
+
+};
 
 
-    const rzp = new Razorpay(options);
+const rzp = new Razorpay(options);
 
-    rzp.open();
+rzp.open();
 
-  }
-  catch(error)
-  {
-    console.error("Payment error:", error);
-    alert("Payment failed. Try again.");
-  }
+}
+
+catch(error){
+
+console.error("Payment error:",error);
+
+alert("Payment failed. Try again.");
+
+}
 
 }
 
