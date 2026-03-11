@@ -1,54 +1,65 @@
 const nodemailer = require("nodemailer");
 
-// ✅ Create transporter FIRST
 const transporter = nodemailer.createTransport({
+
   service: "gmail",
+
+  pool: true,
+  maxConnections: 5,
+  maxMessages: 100,
+
   auth: {
     user: "m.v.sivamanoj2007@gmail.com",
-    pass: "wrrnvfuvjzokydni"  // no spaces
+    pass: "wrrnvfuvjzokydni"
   }
+
 });
 
-// ✅ Main function only
-async function sendMail(to, name, bookName, dueDate, type) {
+async function sendMail(email, name, title, dueDate, type) {
 
-  let message = "";
+  let subject = "";
+  let text = "";
 
-  if (type === "booked") {
-    message = `
-      Hi ${name},<br><br>
-      Your book <b>${bookName}</b> has been successfully booked.<br>
-      Due Date: <b>${dueDate}</b><br><br>
-      Happy Reading 📚
-    `;
+  if(type === "booked"){
+    subject = "📚 Book Booking Confirmation";
+    text = `Hello ${name},
+
+Your book "${title}" has been successfully booked.
+
+Due Date: ${dueDate}
+
+Please return the book before the due date.
+
+Library Management System`;
   }
 
-  if (type === "before") {
-    message = `
-      Hi ${name},<br><br>
-      Reminder: Your book <b>${bookName}</b> is due tomorrow.<br>
-      Due Date: <b>${dueDate}</b><br><br>
-      Please return on time.
-    `;
+  if(type === "before"){
+    subject = "⏰ Reminder: Book Due Tomorrow";
+    text = `Hello ${name},
+
+Reminder that your book "${title}" is due tomorrow.
+
+Due Date: ${dueDate}
+
+Please return it on time.`;
   }
 
-  if (type === "due") {
-    message = `
-      Hi ${name},<br><br>
-      Today is the last day to return <b>${bookName}</b>.<br>
-      Due Date: <b>${dueDate}</b>
-    `;
+  if(type === "due"){
+    subject = "⚠️ Book Due Today";
+    text = `Hello ${name},
+
+Today is the due date for the book "${title}".
+
+Please return it today to avoid fines.`;
   }
 
   await transporter.sendMail({
-    from: '"My Digital Library" <m.v.sivamanoj2007@gmail.com>',
-    to: to,
-    subject: "Library Notification",
-    html: message
+    from: "m.v.sivamanoj2007@gmail.com",
+    to: email,
+    subject,
+    text
   });
 
-  console.log("Mail Sent Successfully");
 }
 
-// ✅ Export properly
 module.exports = sendMail;

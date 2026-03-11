@@ -18,6 +18,7 @@ const { v4: uuidv4 } = require("uuid");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+
 app.engine("ejs", ejsMate);
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
@@ -34,16 +35,6 @@ app.use(session({
   saveUninitialized: true
 }));
 
-const transporter = nodemailer.createTransport({
-
-  service: "gmail",
-
-  auth: {
-    user: process.env.EMAIL,
-    pass: process.env.PASSWORD
-  }
-
-});
 
 // ================= DATABASE =================
 
@@ -91,58 +82,102 @@ function userAuth(req, res, next) {
 // ================= OPENAI =================
 
 
-cron.schedule("0 9 * * *", async () => {
+cron.schedule("0 * * * *", async () => {
 
-  console.log("⏰ Checking book reminders...");
+  try {
 
-  const books = await booked.find();
-  const today = new Date();
+    console.log("⏰ Checking book reminders...");
 
-  for (let book of books) {
+    const now = new Date();
 
-    if (!book.duedate) continue;   // 🔥 skip if no due date
+    // ================= TODAY RANGE =================
+    const startToday = new Date(now);
+    startToday.setHours(0,0,0,0);
 
-    let dueDate = new Date(book.duedate);
-    if (isNaN(dueDate)) continue;  // 🔥 skip invalid date
+    const endToday = new Date(now);
+    endToday.setHours(23,59,59,999);
 
-    let oneDayBefore = new Date(dueDate);
-    oneDayBefore.setDate(oneDayBefore.getDate() - 1);
+    // ================= TOMORROW RANGE =================
+    const startTomorrow = new Date(now);
+    startTomorrow.setDate(startTomorrow.getDate() + 1);
+    startTomorrow.setHours(0,0,0,0);
 
-    // 1 DAY BEFORE
-    if (
-      today.toDateString() === oneDayBefore.toDateString() &&
-      !book.reminderBeforeSent
-    ) {
+    const endTomorrow = new Date(startTomorrow);
+    endTomorrow.setHours(23,59,59,999);
 
-      await sendMail(
-        book.email,
-        book.username || "Student",
-        book.title,
-        dueDate.toDateString(),
-        "before"
-      );
+    // ================= BOOKS DUE TOMORROW =================
 
-      book.reminderBeforeSent = true;
-      await book.save();
+    const beforeBooks = await booked.find({
+      duedate: {
+        $gte: startTomorrow,
+        $lt: endTomorrow
+      },
+      reminderBeforeSent: { $ne: true }
+    });
+
+    for (const book of beforeBooks) {
+
+      try {
+
+        await sendMail(
+          book.email,
+          book.username || "Student",
+          book.title,
+          new Date(book.duedate).toDateString(),
+          "before"
+        );
+
+        book.reminderBeforeSent = true;
+        await book.save();
+
+        console.log(`📩 Reminder sent (before) -> ${book.email}`);
+
+      } catch (mailErr) {
+
+        console.log("Mail error:", mailErr);
+
+      }
+
     }
 
-    // DUE DATE
-    if (
-      today.toDateString() === dueDate.toDateString() &&
-      !book.reminderDueSent
-    ) {
+    // ================= BOOKS DUE TODAY =================
 
-      await sendMail(
-        book.email,
-        book.username || "Student",
-        book.title,
-        dueDate.toDateString(),
-        "due"
-      );
+    const todayBooks = await booked.find({
+      duedate: {
+        $gte: startToday,
+        $lt: endToday
+      },
+      reminderDueSent: { $ne: true }
+    });
 
-      book.reminderDueSent = true;
-      await book.save();
+    for (const book of todayBooks) {
+
+      try {
+
+        await sendMail(
+          book.email,
+          book.username || "Student",
+          book.title,
+          new Date(book.duedate).toDateString(),
+          "due"
+        );
+
+        book.reminderDueSent = true;
+        await book.save();
+
+        console.log(`📩 Reminder sent (due today) -> ${book.email}`);
+
+      } catch (mailErr) {
+
+        console.log("Mail error:", mailErr);
+
+      }
+
     }
+
+  } catch (err) {
+
+    console.error("Cron job error:", err);
 
   }
 
@@ -330,6 +365,14 @@ app.post("/student/signup/submit1", async (req, res) => {
 
   const { name, email, password } = req.body;
 
+  const details={
+    name,
+    email,
+    password
+  };
+
+  console.log(details);
+
   const hashedPassword = await bcrypt.hash(password, 10);
 
   const otp = Math.floor(100000 + Math.random() * 900000);
@@ -384,6 +427,14 @@ app.post("/student/verify-otp", async (req, res) => {
   if (otp == sessionData.otp) {
 
     req.session.verified = true;
+
+    const newUser = new User({
+      name: sessionData.name,
+      email: sessionData.email,
+      password: sessionData.password
+    });
+
+    await newUser.save();
 
     res.redirect("/student/signup/details");
 
@@ -599,7 +650,9 @@ app.get("/removebooked/:email/:id",async(req,res)=>{
 })
 
 app.post("/booking/add/:email/:id", async (req, res) => {
+
   try {
+
     const { email, id } = req.params;
 
     const book = await all.findById(id);
@@ -637,16 +690,27 @@ app.post("/booking/add/:email/:id", async (req, res) => {
       duedate: dueDate
     });
 
-    // 🔥 Save first
     await bookedBook.save();
     await remData.save();
 
-    // ✅ Redirect immediately (no waiting for email)
+    // 📩 Send booking confirmation email
+    sendMail(
+      email,
+      details.firstName || "Student",
+      book.title,
+      dueDate.toDateString(),
+      "booked"
+    ).catch(err => console.log("Mail error:", err));
+
     res.redirect(`/booked/${email}`);
+
   } catch (err) {
+
     console.error(err);
     res.status(500).send("Booking failed");
+
   }
+
 });
 
 
